@@ -783,9 +783,9 @@ function renderGMPlayersList() {
         
         row.innerHTML = `
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-weight: bold; color: var(--text-main);">اللاعب ${index + 1} :</span>
-            <span class="p-name" style="font-weight: bold;">${player.name}</span>
-            <img src="${player.img}" style="width: 28px; height: 28px; border-radius: 6px; object-fit: cover;" alt="role">
+            <span style="font-weight: bold; color: var(--accent-yellow);">#${index + 1}</span>
+            <img src="${player.img}" style="width: 32px; height: 32px; border-radius: 6px; object-fit: cover;" alt="role">
+            <span class="p-name" style="font-weight: bold;">اللاعب ${index + 1} : ${player.name}</span>
           </div>
           <button class="status-btn ${player.alive ? 'btn-kill' : 'btn-revive'}" onclick="togglePlayerStatus(${index})">
             ${player.alive ? 'قتل 💀' : 'إحياء 🟢'}
