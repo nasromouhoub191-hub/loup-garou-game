@@ -244,6 +244,41 @@
       margin: 15px 0;
     }
 
+    .player-row {
+      background: #0f1422;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .player-row.dead {
+      background: rgba(244, 63, 94, 0.15);
+      border-color: var(--accent-red);
+      opacity: 0.7;
+    }
+
+    .player-row.dead .p-name {
+      text-decoration: line-through;
+      color: var(--accent-red);
+    }
+
+    .status-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .btn-kill { background: var(--accent-red); color: white; }
+    .btn-revive { background: #10b981; color: white; }
+
     .call-step {
       background: #0f1422;
       border-right: 4px solid var(--accent-blue);
@@ -506,7 +541,7 @@
             <input type="checkbox" class="checkbox-custom" id="chevalier">
           </div>
 
-          <!-- الشخصيات الجديدة المضافة -->
+          <!-- الشخصيات الجديدة -->
           <div class="role-card-item">
             <div class="role-info">
               <img src="Ours.jpg" class="role-img-thumb" alt="Ours">
@@ -701,7 +736,7 @@
       if(document.getElementById('idiot').checked) assignedRoles.push({ name: 'أحمق القرية (Idiot du Village)', img: imgMap.idiot, key: 'idiot', desc: 'تنجو من الإعدام لأول مرة وتفقد حق التصويت.', alive: true });
       if(document.getElementById('soeurs').checked) assignedRoles.push({ name: 'الأختان (Deux Sœurs)', img: imgMap.soeurs, key: 'soeurs', desc: 'تستيقظان في الليلة الأولى للتعارف.', alive: true });
       if(document.getElementById('chevalier').checked) assignedRoles.push({ name: 'الفارس بسيف صدئ (Chevalier)', img: imgMap.chevalier, key: 'chevalier', desc: 'الذئب الذي يأكلك يموت بعد يومين.', alive: true });
-      
+
       if(document.getElementById('bear').checked) assignedRoles.push({ name: 'مروّض الدب (L\'Ours)', img: imgMap.bear, key: 'bear', desc: 'إذا كان أحد جيرانك المباشرين مستذئباً، ينعر الدب في الصباح.', alive: true });
       if(document.getElementById('cupid').checked) assignedRoles.push({ name: 'كيوبيد (Cupidon)', img: imgMap.cupid, key: 'cupid', desc: 'يختار لاعبين اثنين ليربط مصيريهما بالحب ليلاً.', alive: true });
       if(document.getElementById('thief').checked) assignedRoles.push({ name: 'اللص (Le Voleur)', img: imgMap.thief, key: 'thief', desc: 'يبدل دوره في الليلة الأولى مع إحدى البطاقات الإضافية.', alive: true });
@@ -773,18 +808,16 @@
       }
     }
 
-function renderGMPlayersList() {
+    function renderGMPlayersList() {
       const container = document.getElementById('gm-players-list');
       container.innerHTML = '';
       assignedRoles.forEach((player, index) => {
         const row = document.createElement('div');
         row.className = `player-row ${player.alive ? '' : 'dead'}`;
         row.id = `player-row-${index}`;
-        
         row.innerHTML = `
           <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-weight: bold; color: var(--accent-yellow);">#${index + 1}</span>
-            <img src="${player.img}" style="width: 32px; height: 32px; border-radius: 6px; object-fit: cover;" alt="role">
+            <img src="${player.img}" class="role-img-thumb" alt="role" style="width: 32px; height: 32px;">
             <span class="p-name" style="font-weight: bold;">اللاعب ${index + 1} : ${player.name}</span>
           </div>
           <button class="status-btn ${player.alive ? 'btn-kill' : 'btn-revive'}" onclick="togglePlayerStatus(${index})">
