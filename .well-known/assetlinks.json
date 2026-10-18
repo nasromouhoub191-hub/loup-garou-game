@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vercel.loup_garou_game_eta.twa",
+      "sha256_cert_fingerprints": [
+        "96:84:D0:96:D5:E0:5C:73:97:BD:0C:71:5D:90:58:2E:AB:51:E2:5B:E1:4A:9D:7A:FD:F7:07:6C:8D:36:9F:EB"
+      ]
+    }
+  }
+]
