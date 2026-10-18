@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "app.netlify.magnificent_paprenjak_5d9fde.twa",
+        "sha256_cert_fingerprints": ["BC:54:B1:DC:8A:DD:06:5A:64:E0:D4:A5:1B:39:88:DB:0A:A7:31:BD:1F:C6:29:BB:51:32:05:BD:5C:A9:EE:53"]
+      }
+    }]
