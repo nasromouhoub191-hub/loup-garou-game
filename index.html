@@ -244,6 +244,41 @@
       margin: 15px 0;
     }
 
+    .player-row {
+      background: #0f1422;
+      padding: 12px;
+      border-radius: 10px;
+      border: 1px solid var(--card-border);
+      margin-bottom: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s;
+    }
+
+    .player-row.dead {
+      background: rgba(244, 63, 94, 0.1);
+      border-color: var(--accent-red);
+      opacity: 0.6;
+    }
+
+    .player-row.dead .p-name {
+      text-decoration: line-through;
+      color: var(--accent-red);
+    }
+
+    .status-btn {
+      padding: 6px 12px;
+      border-radius: 6px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .btn-kill { background: var(--accent-red); color: white; }
+    .btn-revive { background: #10b981; color: white; }
+
     .call-step {
       background: #0f1422;
       border-right: 4px solid var(--accent-blue);
@@ -506,31 +541,6 @@
             <input type="checkbox" class="checkbox-custom" id="chevalier">
           </div>
 
-          <!-- الشخصيات الجديدة المضافة -->
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Ours.jpg" class="role-img-thumb" alt="Ours">
-              <div><div class="role-name-ar">مروّض الدب</div><div class="role-name-fr">(L'Ours)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="bear">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Cupidon.jpg" class="role-img-thumb" alt="Cupidon">
-              <div><div class="role-name-ar">كيوبيد</div><div class="role-name-fr">(Cupidon)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="cupid">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Voleur.jpg" class="role-img-thumb" alt="Voleur">
-              <div><div class="role-name-ar">اللص</div><div class="role-name-fr">(Le Voleur)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="thief">
-          </div>
-
         </div>
       </div>
 
@@ -675,9 +685,6 @@
         idiot: 'Idiot du village.jpg',
         soeurs: 'Deux Sœurs.jpg',
         chevalier: 'Chevalier à l\'Épée Rouillée.jpg',
-        bear: 'Ours.jpg',
-        cupid: 'Cupidon.jpg',
-        thief: 'Voleur.jpg',
         ange: 'Ange.jpg',
         villager: 'Carte_SimpleVillaegois.jpg'
       };
@@ -701,10 +708,6 @@
       if(document.getElementById('idiot').checked) assignedRoles.push({ name: 'أحمق القرية (Idiot du Village)', img: imgMap.idiot, key: 'idiot', desc: 'تنجو من الإعدام لأول مرة وتفقد حق التصويت.', alive: true });
       if(document.getElementById('soeurs').checked) assignedRoles.push({ name: 'الأختان (Deux Sœurs)', img: imgMap.soeurs, key: 'soeurs', desc: 'تستيقظان في الليلة الأولى للتعارف.', alive: true });
       if(document.getElementById('chevalier').checked) assignedRoles.push({ name: 'الفارس بسيف صدئ (Chevalier)', img: imgMap.chevalier, key: 'chevalier', desc: 'الذئب الذي يأكلك يموت بعد يومين.', alive: true });
-      
-      if(document.getElementById('bear').checked) assignedRoles.push({ name: 'مروّض الدب (L\'Ours)', img: imgMap.bear, key: 'bear', desc: 'إذا كان أحد جيرانك المباشرين مستذئباً، ينعر الدب في الصباح.', alive: true });
-      if(document.getElementById('cupid').checked) assignedRoles.push({ name: 'كيوبيد (Cupidon)', img: imgMap.cupid, key: 'cupid', desc: 'يختار لاعبين اثنين ليربط مصيريهما بالحب ليلاً.', alive: true });
-      if(document.getElementById('thief').checked) assignedRoles.push({ name: 'اللص (Le Voleur)', img: imgMap.thief, key: 'thief', desc: 'يبدل دوره في الليلة الأولى مع إحدى البطاقات الإضافية.', alive: true });
 
       if(document.getElementById('ange').checked) assignedRoles.push({ name: 'الملاك (L\'Ange)', img: imgMap.ange, key: 'ange', desc: 'هدفك أن يتم إعدامك في اليوم الأول لتفوز فوراً!', alive: true });
 
@@ -773,66 +776,70 @@
       }
     }
 
-function renderGMPlayersList() {
-      const container = document.getElementById('gm-players-list');
-      container.innerHTML = '';
-      assignedRoles.forEach((player, index) => {
-        const row = document.createElement('div');
-        row.className = `player-row ${player.alive ? '' : 'dead'}`;
-        row.id = `player-row-${index}`;
-        
-        row.innerHTML = `
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-weight: bold; color: var(--accent-yellow);">#${index + 1}</span>
-            <span class="p-name" style="font-weight: bold;">اللاعب ${index + 1} : ${player.name}</span>
-          </div>
-          <button class="status-btn ${player.alive ? 'btn-kill' : 'btn-revive'}" onclick="togglePlayerStatus(${index})">
-            ${player.alive ? 'قتل 💀' : 'إحياء ✨'}
-          </button>
-        `;
-        container.appendChild(row);
-      });
-    }
-
-    function togglePlayerStatus(index) {
-      assignedRoles[index].alive = !assignedRoles[index].alive;
-      const row = document.getElementById(`player-row-${index}`);
-      row.className = `player-row ${assignedRoles[index].alive ? '' : 'dead'}`;
-      const btn = row.querySelector('.status-btn');
-      btn.className = `status-btn ${assignedRoles[index].alive ? 'btn-kill' : 'btn-revive'}`;
-      btn.innerText = assignedRoles[index].alive ? 'قتل 💀' : 'إحياء ✨';
-    }
-
     function renderGMNightCalls() {
-      const callsContainer = document.getElementById('gm-night-calls');
-      const steps = [
-        { title: 'اللص (Le Voleur)', text: 'يستيقظ ليلة البداية لتبديل دوره إن أراد.' },
-        { title: 'كيوبيد (Cupidon)', text: 'يستيقظ ليلة البداية لاختيار الحبيبين.' },
-        { title: 'الكلب-الذئب (Chien-Loup)', text: 'يستيقظ ليلة البداية ليقرر صفه.' },
-        { title: 'الأختان (Deux Sœurs)', text: 'تستيقظان في الليلة الأولى فقط للتعارف.' },
-        { title: 'الحامي (Salvateur)', text: 'يستيقظ ليختار لاعباً لحمايته من الذئاب.' },
-        { title: 'الثعلب (Renard)', text: 'يستيقظ لفحص مجموعة من 3 لاعبين مجاورين.' },
-        { title: 'العرافة (Voyante)', text: 'تستيقظ لتكشف بطاقة أحد اللاعبين.' },
-        { title: 'فريق المستذئبين (Les Loups)', text: 'يستيقظ الذئاب لاختيار الضحية (وتسترق الفتاة الصغيرة النظر).' },
-        { title: 'مروّض الدب (L\'Ours)', text: 'يصدر صوتاً في الصباح إن كان أحد جيرانه ذئباً.' },
-        { title: 'الذئب الأبيض (Loup Blanc)', text: 'يستيقظ كل ليلتين لاصطياد ذئب آخر.' },
-        { title: 'الساحرة (Sorcière)', text: 'تستيقظ لرؤية الضحية واستخدام الشفاء أو السم.' },
-        { title: 'الغراب (Corbeau)', text: 'يستيقظ للإشارة إلى لاعب يوضع عليه صوتان غداً.' }
+      const callOrderMaster = [
+        { key: 'chienLoup', title: 'الكلب-الذئب (Chien-Loup)', text: 'يستيقظ ليلة البداية ليقرر صفه (ذئب أو قروي)' },
+        { key: 'soeurs', title: 'الأختان (Deux Sœurs)', text: 'تستيقظان في الليلة الأولى فقط للتعارف' },
+        { key: 'salvateur', title: 'الحامي (Salvateur)', text: 'يستيقظ ليختار لاعباً لحمايته' },
+        { key: 'renard', title: 'الثعلب (Renard)', text: 'يستيقظ لفحص مجموعة من 3 لاعبين مجاورين' },
+        { key: 'voyante', title: 'العرافة (Voyante)', text: 'تستيقظ لتكشف بطاقة أحد اللاعبين' },
+        { key: 'wolfGroup', title: 'فريق المستذئبين (Les Loups)', text: 'يستيقظ الذئاب لاختيار الضحية (تسترق الفتاة الصغيرة النظر)' },
+        { key: 'whiteWolf', title: 'الذئب الأبيض (Loup Blanc)', text: 'يستيقظ كل ليلتين لاصطياد ذئب آخر' },
+        { key: 'sorciere', title: 'الساحرة (Sorcière)', text: 'تستيقظ لرؤية الضحية واستخدام الشفاء أو السم' },
+        { key: 'corbeau', title: 'الغراب (Corbeau)', text: 'يستيقظ للإشارة إلى لاعب يوضع عليه صوتان غداً' }
       ];
 
-      callsContainer.innerHTML = '';
-      steps.forEach((step, idx) => {
-        const div = document.createElement('div');
-        div.className = 'call-step';
-        div.innerHTML = `
-          <div class="call-num">${idx + 1}</div>
-          <div>
-            <div style="font-weight: bold; color: var(--text-main);">${step.title}</div>
-            <div style="font-size: 13px; color: var(--text-muted);">${step.text}</div>
+      let activeKeys = assignedRoles.map(r => r.key);
+      let stepCounter = 1;
+      let html = '';
+
+      callOrderMaster.forEach(item => {
+        let isPresent = false;
+        if (item.key === 'wolfGroup') {
+          isPresent = activeKeys.includes('wolf') || activeKeys.includes('bigWolf') || activeKeys.includes('blackWolf') || activeKeys.includes('fatherWolf');
+        } else {
+          isPresent = activeKeys.includes(item.key);
+        }
+
+        if (isPresent) {
+          html += `
+            <div class="call-step">
+              <div class="call-num">${stepCounter}</div>
+              <div>
+                <div style="font-weight: bold; color: #fff; font-size: 15px;">${item.title}</div>
+                <div style="font-size: 12px; color: var(--text-muted);">${item.text}</div>
+              </div>
+            </div>
+          `;
+          stepCounter++;
+        }
+      });
+
+      document.getElementById('gm-night-calls').innerHTML = html;
+    }
+
+    function togglePlayerStatus(idx) {
+      assignedRoles[idx].alive = !assignedRoles[idx].alive;
+      renderGMPlayersList();
+    }
+
+    function renderGMPlayersList() {
+      let listHTML = '';
+      assignedRoles.forEach((role, idx) => {
+        listHTML += `
+          <div class="player-row ${role.alive ? '' : 'dead'}">
+            <div class="p-name" style="display: flex; align-items: center; gap: 10px;">
+              <b>اللاعب ${idx + 1}:</b>
+              <img src="${role.img}" style="width: 32px; height: 32px; border-radius: 6px;" alt="">
+              <span>${role.name}</span>
+            </div>
+            <button class="status-btn ${role.alive ? 'btn-kill' : 'btn-revive'}" onclick="togglePlayerStatus(${idx})">
+              ${role.alive ? 'قتل 💀' : 'إحياء 🟢'}
+            </button>
           </div>
         `;
-        callsContainer.appendChild(div);
       });
+      document.getElementById('gm-players-list').innerHTML = listHTML;
     }
 
     function startTimer() {
@@ -844,7 +851,7 @@ function renderGMPlayersList() {
         } else {
           clearInterval(timerInterval);
           timerInterval = null;
-          alert('انتهى وقت النقاش والتصويت!');
+          alert('انتهى وقت المتحدث (1:30)!');
         }
       }, 1000);
     }
@@ -861,9 +868,9 @@ function renderGMPlayersList() {
     }
 
     function updateTimerDisplay() {
-      const mins = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-      const secs = (timeLeft % 60).toString().padStart(2, '0');
-      document.getElementById('timer-display').innerText = `${mins}:${secs}`;
+      let m = Math.floor(timeLeft / 60);
+      let s = timeLeft % 60;
+      document.getElementById('timer-display').innerText = `${m < 10 ? '0'+m : m}:${s < 10 ? '0'+s : s}`;
     }
   </script>
 </body>
