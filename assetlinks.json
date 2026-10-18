@@ -1,8 +1,12 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "app.netlify.magnificent_paprenjak_5d9fde.twa",
-        "sha256_cert_fingerprints": ["BC:54:B1:DC:8A:DD:06:5A:64:E0:D4:A5:1B:39:88:DB:0A:A7:31:BD:1F:C6:29:BB:51:32:05:BD:5C:A9:EE:53"]
-      }
-    }]
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vercel.loup_garou_game_eta.twa",
+      "sha256_cert_fingerprints": [
+        "FE:99:7D:AA:DB:E7:1B:B9:30:10:86:23:D6:99:E3:C8:84:DF:BE:50:FD:51:FE:24:60:E1:C8:C8:40:E9:C1:47"
+      ]
+    }
+  }
+]
