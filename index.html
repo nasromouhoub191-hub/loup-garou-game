@@ -780,13 +780,6 @@ function renderGMPlayersList() {
         const row = document.createElement('div');
         row.className = `player-row ${player.alive ? '' : 'dead'}`;
         row.id = `player-row-${index}`;
-        row.style.display = 'flex';
-        row.style.justifyContent = 'space-between';
-        row.style.alignItems = 'center';
-        row.style.width = '100%';
-        row.style.boxSizing = 'border-box';
-        row.style.padding = '10px 15px';
-        row.style.marginBottom = '8px';
         
         row.innerHTML = `
           <div style="display: flex; align-items: center; gap: 10px;">
@@ -794,7 +787,7 @@ function renderGMPlayersList() {
             <span class="p-name" style="font-weight: bold;">اللاعب ${index + 1} : ${player.name}</span>
           </div>
           <button class="status-btn ${player.alive ? 'btn-kill' : 'btn-revive'}" onclick="togglePlayerStatus(${index})">
-           ${player.alive ? 'قتل 💀' : 'إحياء ✨'}
+            ${player.alive ? 'قتل 💀' : 'إحياء ✨'}
           </button>
         `;
         container.appendChild(row);
