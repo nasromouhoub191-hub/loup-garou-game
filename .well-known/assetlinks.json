@@ -1,8 +1,28 @@
-[{
-      "relation": ["delegate_permission/common.handle_all_urls"],
-      "target": {
-        "namespace": "android_app",
-        "package_name": "app.vercel.loup_garou_game_eta.twa",
-        "sha256_cert_fingerprints": ["F9:4D:B5:AC:B3:DC:CE:8D:FB:3F:0A:14:2E:38:92:48:A8:E4:05:05:16:54:AC:A1:F3:76:EA:2C:79:F8:8D:87"]
-      }
-    }]
+39:27:F9:7A:3F:20:66:0C:A3:8E:F1:8D:BD:70:C5:4F:E2:3E:53:84:0B:F3:94:0A:77:45:8E:15:34:4F:88:5F
+```[cite: 9]
+
+---
+
+### 🌐 الخطوة الأخيرة: تكوين ملف `assetlinks.json`
+
+لكي يعمل تطبيقك كشاشة كاملة (TWA) دون ظهور شريط المتصفح، يجب عليك إنشاء ملف باسم **`assetlinks.json`** ووضعه على استضافة موقعك في المسار التالي:
+`[https://loup-garou-game-eta.vercel.app/.well-known/assetlinks.json](https://loup-garou-game-eta.vercel.app/.well-known/assetlinks.json)`
+
+*(أو الدومين الفعلي الذي تستخدمه لموقعك)*.
+
+#### محتوى ملف `assetlinks.json`:
+قم بنسخ هذا الكود ووضعه داخل الملف تماماً كما هو:
+
+```json
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.vercel.loup_garou_game_eta.twa",
+      "sha256_cert_fingerprints": [
+        "39:27:F9:7A:3F:20:66:0C:A3:8E:F1:8D:BD:70:C5:4F:E2:3E:53:84:0B:F3:94:0A:77:45:8E:15:34:4F:88:5F"
+      ]
+    }
+  }
+]
