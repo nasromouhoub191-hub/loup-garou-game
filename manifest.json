@@ -1,7 +1,7 @@
 {
   "name": "Loup-Garou - NASRO MHB",
   "short_name": "Loup-Garou",
-  "start_url": "/",
+ "start_url": "https://loup-garou-game-eta.vercel.app/",
   "display": "standalone",
   "background_color": "#0b0e17",
   "theme_color": "#f43f5e",
