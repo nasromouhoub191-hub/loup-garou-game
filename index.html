@@ -169,6 +169,7 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
         <img id="role-img-display" class="role-img-large" src="" alt="Role">
         <h2 id="role-name" style="color:var(--red);margin:10px 0"></h2>
         <p id="role-desc" style="color:var(--muted);font-size:15px"></p>
+        <p id="captain-badge" style="display:none;margin:12px 0 0;padding:10px 14px;border:1px solid var(--gold);border-radius:12px;color:var(--gold);background:rgba(212,175,106,.1);font-weight:700">👑 أنت القائد! صوتك يحتسب بصوتين.</p>
       </div>
       <button id="action-btn" class="btn-launch" onclick="toggleRole()" style="margin-top:20px"></button>
     </div>
@@ -285,7 +286,7 @@ const NIGHT_STEPS = [
 let counts = {};
 let assignedRoles = [];
 let centerCards = [];
-let captainOn = false;
+let captainOn = false, captainIdx = -1;
 let currentIdx = 0, isShowing = false;
 let timerInterval = null, timeLeft = 90;
 let nightNum = 1;
@@ -325,7 +326,7 @@ function buildSetup(){
   });
   $('guide-box').innerHTML = '<h3 style="color:var(--yellow);margin-top:0">📖 شرح الأدوار والقواعد</h3>' +
     ROLES.filter(r => r.desc || r.key === 'captain').map(r =>
-      `<p>• <b>${r.ar}:</b> ${r.key === 'captain' ? 'منصب يُنتخب من بين اللاعبين في اليوم الأول (لا يأخذ بطاقة). صوته يحتسب بصوتين، وعند موته يختار خليفته.' : r.desc}</p>`
+      `<p>• <b>${r.ar}:</b> ${r.key === 'captain' ? 'منصب يُسحب بالقرعة عشوائياً بين اللاعبين (لا يأخذ بطاقة مستقلة). يعرف نفسه عند كشف دوره، وصوته يحتسب بصوتين، وعند موته يختار خليفته.' : r.desc}</p>`
     ).join('');
   updateTotal();
 }
@@ -359,9 +360,20 @@ function changeCount(type, val){
 }
 
 /* ===== بدء اللعبة ===== */
+// رقم عشوائي آمن من 0 إلى n-1 (crypto + رفض القيم المنحازة)، مع بديل احتياطي
+function randInt(n){
+  if (window.crypto && crypto.getRandomValues) {
+    const max = Math.floor(4294967296 / n) * n; // نرفض القيم التي تسبب انحيازاً
+    const buf = new Uint32Array(1);
+    do { crypto.getRandomValues(buf); } while (buf[0] >= max);
+    return buf[0] % n;
+  }
+  return Math.floor(Math.random() * n);
+}
+// خلط Fisher–Yates: كل ترتيب ممكن له نفس الاحتمال تماماً
 function shuffle(a){
   for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
+    const j = randInt(i + 1);
     [a[i], a[j]] = [a[j], a[i]];
   }
   return a;
@@ -393,6 +405,7 @@ function startGame(){
   }
 
   shuffle(assignedRoles);
+  captainIdx = captainOn ? randInt(assignedRoles.length) : -1; // القائد بالقرعة
   currentIdx = 0; nightNum = 1;
   $('setup-screen').style.display = 'none';
   runDeal(total);
@@ -436,6 +449,7 @@ function updatePlayerUI(){
   $('role-card').style.display = 'none';
   $('role-img-display').src = '';
   $('role-name').innerText = '';
+  $('captain-badge').style.display = 'none';
   $('role-desc').innerText = '';
   $('action-btn').innerText = 'اضغط لكشف دورك 👁️';
   isShowing = false;
@@ -447,6 +461,7 @@ function toggleRole(){
     $('role-img-display').src = role.img;
     $('role-name').innerText = role.name;
     $('role-desc').innerText = role.desc;
+    $('captain-badge').style.display = currentIdx === captainIdx ? 'block' : 'none';
     $('role-card').style.display = 'block';
     $('action-btn').innerText = 'إخفاء وتمرير الهاتف للاعب التالي 📲';
     isShowing = true;
@@ -456,6 +471,7 @@ function toggleRole(){
     else {
       $('role-card').style.display = 'none';
       $('role-img-display').src = '';
+      $('captain-badge').style.display = 'none';
       $('game-screen').style.display = 'none';
       $('pass-to-gm-screen').style.display = 'block';
     }
@@ -475,7 +491,7 @@ function renderGMExtra(){
   const box = $('gm-extra');
   let html = '';
   if (captainOn)
-    html += '<p style="margin:0 0 8px">👑 <b>القائد:</b> في صباح اليوم الأول اجعل اللاعبين ينتخبون قائداً من بينهم (صوته بصوتين).</p>';
+    html += `<p style="margin:0 0 8px">👑 <b>القائد (بالقرعة):</b> اللاعب رقم ${captainIdx + 1}. أعلن عنه في صباح اليوم الأول (صوته بصوتين)، وعند موته يختار خليفته.</p>`;
   if (centerCards.length)
     html += `<p style="margin:0">🃏 <b>بطاقتا اللص الإضافيتان:</b> ${centerCards.map(c => c.name).join(' + ')}</p>`;
   box.innerHTML = html;
@@ -499,7 +515,7 @@ function renderGMPlayersList(){
     row.innerHTML = `
       <div style="display:flex;align-items:center;gap:10px">
         <img src="${p.img}" class="role-img-thumb" alt="role" style="width:32px;height:32px">
-        <span class="p-name" style="font-weight:bold">اللاعب ${i + 1} : ${p.name}</span>
+        <span class="p-name" style="font-weight:bold">اللاعب ${i + 1}${i === captainIdx ? ' 👑' : ''} : ${p.name}</span>
       </div>
       <button class="status-btn ${p.alive ? 'btn-kill' : 'btn-revive'}" onclick="togglePlayerStatus(${i})">${p.alive ? 'قتل 💀' : 'إحياء 🟢'}</button>`;
     c.appendChild(row);
@@ -573,7 +589,7 @@ function updateTimerDisplay(){
 function resetGame(){
   if (updateReady) { location.reload(); return; }
   resetTimer();
-  assignedRoles = []; centerCards = [];
+  assignedRoles = []; centerCards = []; captainIdx = -1;
   currentIdx = 0; isShowing = false; nightNum = 1;
   clearDeal();
   ['shuffle-screen','game-screen','pass-to-gm-screen','gm-screen'].forEach(id => $(id).style.display = 'none');
