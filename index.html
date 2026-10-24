@@ -364,7 +364,7 @@
 
           <div class="role-card-item">
             <div class="role-info">
-              <img src="Les_Loups_Garous_noir.jpg" class="role-img-thumb" alt="Grand Méchant">
+              <img src="Grand-MeFchant-Loup.jpg" class="role-img-thumb" alt="Grand Méchant">
               <div>
                 <div class="role-name-ar">الذئب الأكبر</div>
                 <div class="role-name-fr">(Grand Méchant)</div>
@@ -444,6 +444,14 @@
       <div class="section-box">
         <div class="section-title village">🛡️ أدوار القرية الخاصة <span style="font-size: 14px; color: var(--text-muted);">(Le Village)</span></div>
         <div class="roles-grid">
+
+          <div class="role-card-item">
+            <div class="role-info">
+              <img src="Capitaine.jpg" class="role-img-thumb" alt="Capitaine">
+              <div><div class="role-name-ar">القائد / العمدة</div><div class="role-name-fr">(Le Capitaine)</div></div>
+            </div>
+            <input type="checkbox" class="checkbox-custom" id="captain">
+          </div>
 
           <div class="role-card-item">
             <div class="role-info">
@@ -693,11 +701,12 @@
       
       const imgMap = {
         wolf: 'Les_Loups_Garous_noir.jpg',
-        bigWolf: 'Les_Loups_Garous_noir.jpg',
+        bigWolf: 'Grand-MeFchant-Loup.jpg',
         blackWolf: 'Les_Loups_Garous_noir.jpg',
         whiteWolf: 'Loup Blanc.jpg',
         fatherWolf: 'Père des Loups.jpg',
         chienLoup: 'Chien-Loup.jpg',
+        captain: 'Capitaine.jpg',
         voyante: 'Voyante.jpg',
         sorciere: 'Sorcière.jpg',
         chasseur: 'Chasseur.jpg',
@@ -724,6 +733,7 @@
       for(let i=0; i<counts.fatherWolf; i++) assignedRoles.push({ name: 'أب الذئاب (Père des Loups)', img: imgMap.fatherWolf, key: 'fatherWolf', desc: 'تستطيع تحويل ضحية إلى ذئب بدلاً من قتلها مرة واحدة باللعبة.', alive: true });
       for(let i=0; i<counts.chienLoup; i++) assignedRoles.push({ name: 'الكلب-الذئب (Chien-Loup)', img: imgMap.chienLoup, key: 'chienLoup', desc: 'يختار في بداية اللعبة ما إذا كان قروياً أو من صف الذئاب.', alive: true });
 
+      if(document.getElementById('captain') && document.getElementById('captain').checked) assignedRoles.push({ name: 'القائد / العمدة (Le Capitaine)', img: imgMap.captain, key: 'captain', desc: 'صوتك يحتسب بصوتين أثناء التصويت النهاري، وفي حال موتك تختار من يخلفك.', alive: true });
       if(document.getElementById('voyante').checked) assignedRoles.push({ name: 'العرافة (Voyante)', img: imgMap.voyante, key: 'voyante', desc: 'تكشف دور لاعب واحد كل ليلة.', alive: true });
       if(document.getElementById('sorciere').checked) assignedRoles.push({ name: 'الساحرة (Sorcière)', img: imgMap.sorciere, key: 'sorciere', desc: 'تمتلك جرعة شفاعة وجرعة سم.', alive: true });
       if(document.getElementById('chasseur').checked) assignedRoles.push({ name: 'الصياد (Chasseur)', img: imgMap.chasseur, key: 'chasseur', desc: 'إذا مت تطلق النار على شخص ليأخذ معك.', alive: true });
