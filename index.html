@@ -6,7 +6,7 @@
 <title>تطبيق المستذئبين - MADE BY NASRO MHB</title>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1324512454522157" crossorigin="anonymous"></script>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0a0c1a">
+<meta name="theme-color" content="#070509">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
@@ -14,33 +14,48 @@
 <link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0a0c1a;--card:#12162b;--card2:#0e1122;--bd:#2a2f4d;
+  --bg:#070509;--card:#150b13;--card2:#0e070d;--bd:#33202b;
   --red:#b3243f;--purple:#8b6fd6;--yellow:#d4af6a;--blue:#5a8fc2;
   --text:#f1e9d8;--muted:#9a9cb5;--gold:#d4af6a;--gold-soft:rgba(212,175,106,.28);
 }
 *{box-sizing:border-box;font-family:'Cairo','Segoe UI',Tahoma,sans-serif}
 h1,h2,h3,.sponsor-name,.section-title,.header-title{font-family:'Aref Ruqaa','Cairo',serif}
 body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1.7;
-  background-image:radial-gradient(ellipse at 50% -10%,rgba(139,111,214,.14),transparent 55%),radial-gradient(ellipse at 50% 110%,rgba(179,36,63,.10),transparent 50%);
+  background-image:radial-gradient(ellipse at 50% -10%,rgba(179,36,63,.16),transparent 55%),radial-gradient(ellipse at 50% 110%,rgba(179,36,63,.10),transparent 50%);
   background-attachment:fixed}
 :focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
 /* الشاشة الافتتاحية */
-#welcome-screen{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;padding:24px;text-align:center;
-  background:radial-gradient(circle at 50% 28%,#1d1a45 0%,#0a0c1a 62%)}
+#welcome-screen{position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;padding:24px;text-align:center;
+  background:
+   radial-gradient(1.5px 1.5px at 12% 18%,#fff9,transparent),radial-gradient(1px 1px at 28% 8%,#fff8,transparent),radial-gradient(1.5px 1.5px at 44% 22%,#fff7,transparent),
+   radial-gradient(1px 1px at 63% 10%,#fff9,transparent),radial-gradient(1.5px 1.5px at 78% 20%,#fff8,transparent),radial-gradient(1px 1px at 90% 7%,#fff7,transparent),
+   radial-gradient(1px 1px at 8% 45%,#fff6,transparent),radial-gradient(1px 1px at 93% 42%,#fff6,transparent),
+   radial-gradient(ellipse at 50% 22%,rgba(150,18,45,.42) 0%,transparent 60%),
+   linear-gradient(180deg,#0a0409 0%,#14050c 55%,#040206 100%);
+  box-shadow:inset 0 0 160px rgba(0,0,0,.85)}
+#welcome-screen>*{position:relative;z-index:1}
+#welcome-screen::before{content:'';position:absolute;left:-10%;right:-10%;bottom:0;height:42%;z-index:0;pointer-events:none;
+  background:radial-gradient(ellipse at 20% 85%,rgba(215,190,200,.13),transparent 60%),radial-gradient(ellipse at 80% 95%,rgba(215,190,200,.10),transparent 60%);animation:fog 16s ease-in-out infinite alternate}
+@keyframes fog{to{transform:translateX(7%)}}
+.hero-art{cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none}
+.hero-hint{font-size:12px;color:var(--muted);margin:0 0 10px}
+.hero-art{width:min(360px,90vw);height:auto;margin:0 0 4px;filter:drop-shadow(0 0 30px rgba(190,25,55,.35))}
+.hero-art .halo{animation:halo 6s ease-in-out infinite alternate}
+@keyframes halo{to{opacity:.6}}
 .moon{width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:64px;margin:6px 0 18px;
   background:radial-gradient(circle at 35% 30%,#fffaf0,#e8dcc0 55%,#bfae88);
   box-shadow:0 0 0 10px rgba(232,220,192,.07),0 0 70px rgba(232,220,192,.45);animation:glow 5s ease-in-out infinite alternate}
 @keyframes glow{to{box-shadow:0 0 0 14px rgba(232,220,192,.09),0 0 100px rgba(232,220,192,.6)}}
 .sponsor-badge{border:1px solid var(--gold-soft);color:var(--gold);padding:6px 20px;border-radius:999px;font-size:14px;margin-bottom:10px}
 .sponsor-name{font-size:30px;font-weight:700;color:var(--text);margin:6px 0}
-#welcome-screen h1{font-size:52px;letter-spacing:.12em;margin:0;color:var(--text);font-weight:700;text-shadow:0 2px 24px rgba(179,36,63,.7)}
+#welcome-screen h1{font-size:52px;letter-spacing:.12em;margin:0;color:var(--text);font-weight:700;text-shadow:0 0 18px rgba(200,30,60,.85),0 3px 30px rgba(120,0,20,.9)}
 .btn-start-game{background:linear-gradient(180deg,#c42c4a,#8f1a32);color:#fff7e6;border:1px solid var(--gold);padding:14px 50px;border-radius:999px;font-size:20px;font-weight:700;cursor:pointer;
   box-shadow:0 0 0 4px rgba(212,175,106,.12),0 12px 30px rgba(179,36,63,.45);margin-top:26px;transition:transform .15s}
 .btn-start-game:active{transform:scale(.97)}
 
 /* الرأس */
-.app-header{background:rgba(10,12,26,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--gold-soft);padding:12px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+.app-header{background:rgba(7,5,9,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--gold-soft);padding:12px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
 .header-title{font-size:21px;color:var(--gold)}
 .top-bar{display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:20px auto 10px;padding:0 15px}
 .btn-icon-bg{background:transparent;border:1px solid var(--gold-soft);color:var(--text);padding:8px 16px;border-radius:10px;cursor:pointer;font-weight:600;transition:background .15s}
@@ -56,7 +71,7 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
 .role-card-item{background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;transition:border-color .2s,background .2s}
 .role-card-item:hover,.role-card-item:has(input:checked){border-color:var(--gold-soft);background:rgba(212,175,106,.06)}
 .role-info{display:flex;align-items:center;gap:12px}
-.role-img-thumb{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-soft);background:#1e2240}
+.role-img-thumb{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-soft);background:#2a1520}
 .role-name-ar{font-weight:700;font-size:15px}
 .role-name-fr{font-size:11px;color:var(--muted)}
 .counter-group{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.3);padding:4px 8px;border-radius:999px;border:1px solid var(--bd)}
@@ -67,8 +82,8 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
 .btn-launch{width:100%;background:linear-gradient(180deg,#c42c4a,#8f1a32);border:1px solid var(--gold);color:#fff7e6;padding:16px;font-size:20px;font-weight:700;border-radius:14px;cursor:pointer;margin-top:10px;box-shadow:0 10px 26px rgba(179,36,63,.35)}
 
 /* بطاقة كشف الدور: اللحظة المميزة */
-.play-card{background:linear-gradient(180deg,#171b36,#0f1226);border:1px solid var(--gold);border-radius:20px;padding:30px 26px;max-width:480px;margin:30px auto;text-align:center;
-  box-shadow:inset 0 0 0 6px #0f1226,inset 0 0 0 7px var(--gold-soft),0 24px 60px rgba(0,0,0,.55)}
+.play-card{background:linear-gradient(180deg,#1c0d17,#0d070c);border:1px solid var(--gold);border-radius:20px;padding:30px 26px;max-width:480px;margin:30px auto;text-align:center;
+  box-shadow:inset 0 0 0 6px #0d070c,inset 0 0 0 7px var(--gold-soft),0 24px 60px rgba(0,0,0,.55)}
 .play-card h2{font-size:28px}
 .role-img-large{width:190px;height:250px;border-radius:14px;object-fit:cover;border:2px solid var(--gold);margin:16px auto;display:block;box-shadow:0 0 0 6px rgba(212,175,106,.12),0 0 40px rgba(139,111,214,.35)}
 #role-name{font-size:30px;color:#f06a84!important}
@@ -88,12 +103,21 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
 
 /* حركة القرعة */
 .deal-stage{position:relative;width:170px;height:250px;margin:70px auto 30px}
-.deal-card{position:absolute;inset:0;border-radius:14px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:54px;
-  background:radial-gradient(circle at 50% 50%,#2a2160,#14173a 70%);box-shadow:inset 0 0 0 5px #14173a,inset 0 0 0 6px var(--gold-soft),0 8px 20px rgba(0,0,0,.5);
+.deal-card{position:absolute;inset:0;border-radius:14px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:54px;color:var(--gold);
+  background:radial-gradient(circle at 50% 50%,#4a0f22,#1a0810 70%);box-shadow:inset 0 0 0 5px #1a0810,inset 0 0 0 6px var(--gold-soft),0 8px 20px rgba(0,0,0,.5);
   transform:translateY(calc(var(--i)*-2px));transition:transform .55s cubic-bezier(.3,.7,.3,1),opacity .55s}
 .deal-stage.shuffling .deal-card{animation:shuf .6s ease-in-out calc(var(--i)*60ms) 2}
 @keyframes shuf{0%,100%{transform:translateY(calc(var(--i)*-2px))}30%{transform:translate(-95px,calc(var(--i)*-2px)) rotate(-9deg)}70%{transform:translate(95px,calc(var(--i)*-2px)) rotate(9deg)}}
 #deal-text{text-align:center;font-family:'Aref Ruqaa',serif;font-size:24px;color:var(--gold);margin:0 0 16px}
+
+/* بطاقة الإعلان الشخصي */
+.promo{max-width:420px;margin:26px auto 0;padding:16px 18px;border:1px solid var(--gold-soft);border-radius:16px;text-align:center;background:linear-gradient(180deg,rgba(212,175,106,.09),rgba(212,175,106,.02))}
+.promo-name{font-family:'Aref Ruqaa',serif;font-size:26px;color:var(--gold);margin:0}
+.promo-tag{font-size:13px;color:var(--muted);margin:2px 0 12px}
+.promo-links{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.promo-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--gold-soft);border-radius:999px;color:var(--text);text-decoration:none;font-size:14px;font-weight:600;background:transparent;cursor:pointer}
+.promo-chip:hover{background:rgba(212,175,106,.14)}
+.promo-chip.share{background:linear-gradient(180deg,#c42c4a,#8f1a32);border-color:var(--gold);color:#fff7e6}
 @media (max-width:520px){#welcome-screen h1{font-size:40px}.header-title{font-size:17px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -107,10 +131,46 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
   <div class="sponsor-badge">✨ تطبيق للعبة المستذئب ✨</div>
   <div class="sponsor-name">من صنع NASRO MHB</div>
   <div style="color:var(--muted);font-size:13px;margin-bottom:6px;letter-spacing:.1em">MADE BY NASRO MHB</div>
-  <div class="moon" aria-hidden="true">🐺</div>
+  <svg class="hero-art" viewBox="0 0 360 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ذئب يتابع حركتك، المسه ليعوي">
+<defs>
+<radialGradient id="mg" cx="38%" cy="32%" r="80%"><stop offset="0" stop-color="#fff6e2"/><stop offset=".6" stop-color="#e3cf9f"/><stop offset="1" stop-color="#a68a55"/></radialGradient>
+<radialGradient id="rg"><stop offset="0" stop-color="#c0183a" stop-opacity=".55"/><stop offset="1" stop-color="#c0183a" stop-opacity="0"/></radialGradient>
+<linearGradient id="fur" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b5b6b"/><stop offset=".55" stop-color="#26262f"/><stop offset="1" stop-color="#0b0b10"/></linearGradient>
+<linearGradient id="muz" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8d8d9c"/><stop offset="1" stop-color="#3f3f4c"/></linearGradient>
+<linearGradient id="mth" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a0e24"/><stop offset="1" stop-color="#1a0208"/></linearGradient>
+<radialGradient id="eyeg"><stop offset="0" stop-color="#fff3a8"/><stop offset=".45" stop-color="#ffb000"/><stop offset="1" stop-color="#b01015"/></radialGradient>
+<filter id="eg" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
+<clipPath id="cL"><polygon points="126,108 138,105 152,108 164,116 172,126 158,130 142,126 130,116"/></clipPath><clipPath id="cR"><polygon points="234,108 222,105 208,108 196,116 188,126 202,130 218,126 230,116"/></clipPath>
+</defs>
+<g id="moonG">
+ <circle class="halo" cx="185" cy="115" r="135" fill="url(#rg)"/><circle id="flare" cx="185" cy="115" r="165" fill="url(#rg)" opacity="0"/>
+ <circle cx="185" cy="115" r="88" fill="url(#mg)"/>
+ <circle cx="150" cy="85" r="14" fill="#8a6f3a" opacity=".18"/><circle cx="215" cy="70" r="9" fill="#8a6f3a" opacity=".16"/><circle cx="225" cy="135" r="18" fill="#8a6f3a" opacity=".14"/><circle cx="160" cy="150" r="8" fill="#8a6f3a" opacity=".16"/>
+</g>
+<g id="wolfG">
+ <polygon points="180,92 150,84 128,28 118,80 104,104 84,100 98,122 72,128 92,146 70,156 94,168 78,184 104,188 96,206 124,204 120,230 150,226 160,248 180,252" fill="url(#fur)" stroke="#a9a9bc" stroke-opacity=".55" stroke-width=".9" stroke-linejoin="round"/><polygon points="180,92 210,84 232,28 242,80 256,104 276,100 262,122 288,128 268,146 290,156 266,168 282,184 256,188 264,206 236,204 240,230 210,226 200,248 180,252" fill="url(#fur)" stroke="#a9a9bc" stroke-opacity=".55" stroke-width=".9" stroke-linejoin="round"/>
+ <polygon points="170,96 180,66 190,96" fill="#3a3a46"/>
+ <polygon points="134,48 124,74 146,80" fill="#6a1226" /><polygon points="226,48 236,74 214,80" fill="#6a1226" />
+ <polygon points="180,108 166,124 156,146 152,170 160,188 180,190" fill="url(#muz)" /><polygon points="180,108 194,124 204,146 208,170 200,188 180,190" fill="url(#muz)" />
+ <polygon points="180,186 158,186 152,208 180,228" fill="url(#mth)" /><polygon points="180,186 202,186 208,208 180,228" fill="url(#mth)" />
+ <g id="jaw"><polygon points="180,192 156,192 150,206 160,218 180,226" fill="#2e2e39" /><polygon points="180,192 204,192 210,206 200,218 180,226" fill="#2e2e39" /><polygon points="164,194 169,194 166,182" fill="#f4efe2" /><polygon points="196,194 191,194 194,182" fill="#f4efe2" /><polygon points="160,218 150,234 172,224" fill="#2e2e39" /><polygon points="200,218 210,234 188,224" fill="#2e2e39" /></g>
+ <polygon points="160,186 167,186 163,206" fill="#f6f1e4" /><polygon points="200,186 193,186 197,206" fill="#f6f1e4" /><polygon points="172,186 177,186 175,198" fill="#f6f1e4" /><polygon points="188,186 183,186 185,198" fill="#f6f1e4" />
+ <path d="M150,177 Q165,172 180,181 Q195,172 210,177" fill="none" stroke="#08080c" stroke-width="2.4" stroke-linecap="round"/>
+ <polygon points="180,148 166,153 171,166 180,171" fill="#07070b" /><polygon points="180,148 194,153 189,166 180,171" fill="#07070b" />
+ <ellipse cx="173" cy="153" rx="4" ry="1.6" fill="#fff" opacity=".35"/>
+ <g id="glowG" opacity=".35" filter="url(#eg)"><ellipse cx="150" cy="118" rx="26" ry="13" fill="#ff8a00"/><ellipse cx="210" cy="118" rx="26" ry="13" fill="#ff8a00"/></g>
+ <polygon points="126,108 138,105 152,108 164,116 172,126 158,130 142,126 130,116" fill="url(#eyeg)" stroke="#1a0608" stroke-width="1"/><polygon points="234,108 222,105 208,108 196,116 188,126 202,130 218,126 230,116" fill="url(#eyeg)" stroke="#1a0608" stroke-width="1"/>
+ <g clip-path="url(#cL)"><ellipse id="pupL" cx="149" cy="117" rx="3.2" ry="9" fill="#0a0204"/></g>
+ <g clip-path="url(#cR)"><ellipse id="pupR" cx="211" cy="117" rx="3.2" ry="9" fill="#0a0204"/></g>
+ <polygon id="lidL" points="126,108 138,105 152,108 164,116 172,126 158,130 142,126 130,116" fill="#1d1d26" opacity="0"/><polygon id="lidR" points="234,108 222,105 208,108 196,116 188,126 202,130 218,126 230,116" fill="#1d1d26" opacity="0"/>
+ <polygon points="120,100 178,124 178,114 130,90" fill="#08080c" /><polygon points="240,100 182,124 182,114 230,90" fill="#08080c" />
+ <path d="M118,92 L150,146 M127,88 L157,136" stroke="#b3243f" stroke-width="2" stroke-linecap="round" opacity=".85"/>
+</g></svg>
+  <p class="hero-hint">المس الذئب ليعوي · حرّك إصبعك أو هاتفك ليتبعك بنظراته</p>
   <h1>LOUP-GAROU</h1>
   <p style="color:var(--muted);font-size:15px">تطبيق توزيع الأدوار والقرعة للعب مع الأصدقاء</p>
   <button class="btn-start-game" onclick="enterApp()">دخول اللعبة 🎲</button>
+  <div class="promo" data-promo></div>
 </div>
 
 <div id="app-content" style="display:none">
@@ -149,6 +209,8 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
     </div>
 
     <button class="btn-launch" onclick="startGame()">🎲 ابدأ توزيع الأدوار (القرعة)</button>
+
+    <div class="promo" data-promo></div>
 
     <!-- وحدة إعلانية: استبدل data-ad-slot برقم وحدتك من AdSense -->
     <ins class="adsbygoogle" style="display:block;margin-top:20px" data-ad-client="ca-pub-1324512454522157" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
@@ -420,7 +482,7 @@ function runDeal(total){
   const stage = $('deal-stage');
   const n = Math.min(total, 9);
   stage.className = 'deal-stage';
-  stage.innerHTML = Array.from({length:n}, (_, i) => `<div class="deal-card" style="--i:${i}">🐺</div>`).join('');
+  stage.innerHTML = Array.from({length:n}, (_, i) => `<div class="deal-card" style="--i:${i}">☾</div>`).join('');
   $('deal-text').innerText = 'تُخلط الأوراق...';
   $('shuffle-screen').style.display = 'block';
   requestAnimationFrame(() => stage.classList.add('shuffling'));
@@ -618,7 +680,115 @@ if ('serviceWorker' in navigator && location.protocol !== 'file:') {
   });
 }
 
+/* ===== إعلانك الشخصي: عدّل هنا فقط ===== */
+const PROMO = {
+  name: 'NASRO MHB',
+  tagline: 'مطوّر هذه اللعبة — تابعني لمزيد من الألعاب والتطبيقات',
+  links: [
+    {label:'انستغرام', icon:'📸', url:'https://www.instagram.com/nasromhb/'},   // ضع رابط حسابك بين علامتي الاقتباس
+    {label:'تيك توك',  icon:'🎵', url:'https://www.tiktok.com/@nasromhb'},
+    {label:'يوتيوب',   icon:'▶️', url:''},
+    {label:'واتساب',   icon:'💬', url:''},
+    {label:'فيسبوك',   icon:'👍', url:''}
+  ],
+  shareText: 'العب المستذئبين مع أصدقائك 🐺'
+};
+function renderPromo(){
+  const links = PROMO.links.filter(l => l.url).map(l =>
+    `<a class="promo-chip" href="${l.url}" target="_blank" rel="noopener">${l.icon} ${l.label}</a>`).join('');
+  const html = `<p class="promo-name">${PROMO.name}</p><p class="promo-tag">${PROMO.tagline}</p>
+    <div class="promo-links">${links}<button class="promo-chip share" onclick="shareApp()">📤 شارك اللعبة</button></div>`;
+  document.querySelectorAll('[data-promo]').forEach(el => el.innerHTML = html);
+}
+async function shareApp(){
+  const url = location.href.split('#')[0];
+  try {
+    if (navigator.share) { await navigator.share({title: document.title, text: PROMO.shareText, url}); return; }
+    await navigator.clipboard.writeText(PROMO.shareText + ' ' + url);
+    toast('تم نسخ رابط اللعبة ✅');
+  } catch (e) { /* ألغى المستخدم المشاركة */ }
+}
+
+/* ===== الذئب التفاعلي ===== */
+function initHero(){
+  const art = document.querySelector('.hero-art'); if (!art) return;
+  const g = id => document.getElementById(id);
+  const wolfG=g('wolfG'), moonG=g('moonG'), jaw=g('jaw'), pupL=g('pupL'), pupR=g('pupR'),
+        lidL=g('lidL'), lidR=g('lidR'), glow=g('glowG'), flare=g('flare');
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const clamp = (v, a = -1, b = 1) => Math.max(a, Math.min(b, v));
+  let tx = 0, ty = 0, cx = 0, cy = 0, howlAt = -1, blinkAt = 2500, blinkStart = -1, actx = null;
+
+  function aim(x, y){
+    const r = art.getBoundingClientRect();
+    tx = clamp((x - (r.left + r.width / 2)) / (innerWidth / 2));
+    ty = clamp((y - (r.top + r.height / 2)) / (innerHeight / 2));
+  }
+  addEventListener('pointermove', e => aim(e.clientX, e.clientY), {passive: true});
+  addEventListener('deviceorientation', e => {
+    if (e.gamma == null) return;
+    tx = clamp(e.gamma / 25); ty = clamp(((e.beta == null ? 50 : e.beta) - 50) / 25);
+  }, {passive: true});
+
+  function sound(){
+    try {
+      const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return;
+      actx = actx || new AC(); if (actx.state === 'suspended') actx.resume();
+      const t = actx.currentTime, out = actx.createGain(), lp = actx.createBiquadFilter();
+      lp.type = 'lowpass'; lp.frequency.value = 1100;
+      out.gain.setValueAtTime(0, t); out.gain.linearRampToValueAtTime(.22, t + .45);
+      out.gain.setValueAtTime(.22, t + 1.5); out.gain.linearRampToValueAtTime(0, t + 2.3);
+      lp.connect(out); out.connect(actx.destination);
+      const lfo = actx.createOscillator(), lg = actx.createGain();
+      lfo.frequency.value = 5.5; lg.gain.value = 9; lfo.connect(lg);
+      [['sawtooth', 1], ['triangle', 1.006]].forEach(([type, k]) => {
+        const o = actx.createOscillator(); o.type = type;
+        o.frequency.setValueAtTime(240 * k, t);
+        o.frequency.exponentialRampToValueAtTime(560 * k, t + .9);
+        o.frequency.exponentialRampToValueAtTime(400 * k, t + 2.2);
+        lg.connect(o.frequency); o.connect(lp); o.start(t); o.stop(t + 2.4);
+      });
+      lfo.start(t); lfo.stop(t + 2.4);
+    } catch (e) {}
+  }
+  function howl(){
+    if (howlAt > 0 && performance.now() - howlAt < 2300) return;
+    howlAt = performance.now(); sound();
+    if (navigator.vibrate) navigator.vibrate([80, 50, 160]);
+  }
+  art.addEventListener('pointerdown', () => {
+    if (window.DeviceOrientationEvent && DeviceOrientationEvent.requestPermission) DeviceOrientationEvent.requestPermission().catch(() => {});
+    howl();
+  });
+
+  function frame(now){
+    if ($('welcome-screen').style.display === 'none') return;
+    cx += (tx - cx) * .12; cy += (ty - cy) * .12;
+    let h = 0;
+    if (howlAt > 0) { const t = (now - howlAt) / 2200; h = t < 1 ? Math.pow(Math.sin(Math.PI * t), .6) : 0; }
+    let b = 0;
+    if (!reduce) {
+      if (now > blinkAt && blinkStart < 0) blinkStart = now;
+      if (blinkStart > 0) {
+        const t = (now - blinkStart) / 160; b = t < 1 ? Math.sin(Math.PI * t) : 0;
+        if (t >= 1) { blinkStart = -1; blinkAt = now + 2500 + Math.random() * 3500; }
+      }
+    }
+    const sc = .88 * (reduce ? 1 : 1 + .006 * Math.sin(now / 650));
+    wolfG.setAttribute('transform', `translate(${cx * 6} ${cy * 4 - h * 5}) rotate(${cx * 3} 180 210) translate(180 252) scale(${sc}) translate(-180 -252)`);
+    moonG.setAttribute('transform', `translate(${-cx * 8} ${-cy * 5})`);
+    jaw.setAttribute('transform', `translate(0 ${h * 26})`);
+    const p = `translate(${cx * 5} ${cy * 3})`; pupL.setAttribute('transform', p); pupR.setAttribute('transform', p);
+    lidL.setAttribute('opacity', b); lidR.setAttribute('opacity', b);
+    glow.setAttribute('opacity', .35 + h * .6); flare.setAttribute('opacity', h * .6);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+
 buildSetup();
+renderPromo();
+initHero();
 </script>
 </body>
 </html>
