@@ -849,23 +849,40 @@
 
     function renderGMNightCalls() {
       const callsContainer = document.getElementById('gm-night-calls');
-      const steps = [
-        { title: 'اللص (Le Voleur)', text: 'يستيقظ ليلة البداية لتبديل دوره إن أراد.' },
-        { title: 'كيوبيد (Cupidon)', text: 'يستيقظ ليلة البداية لاختيار الحبيبين.' },
-        { title: 'الكلب-الذئب (Chien-Loup)', text: 'يستيقظ ليلة البداية ليقرر صفه.' },
-        { title: 'الأختان (Deux Sœurs)', text: 'تستيقظان في الليلة الأولى فقط للتعارف.' },
-        { title: 'الحامي (Salvateur)', text: 'يستيقظ ليختار لاعباً لحمايته من الذئاب.' },
-        { title: 'الثعلب (Renard)', text: 'يستيقظ لفحص مجموعة من 3 لاعبين مجاورين.' },
-        { title: 'العرافة (Voyante)', text: 'تستيقظ لتكشف بطاقة أحد اللاعبين.' },
-        { title: 'فريق المستذئبين (Les Loups)', text: 'يستيقظ الذئاب لاختيار الضحية (وتسترق الفتاة الصغيرة النظر).' },
-        { title: 'مروّض الدب (L\'Ours)', text: 'يصدر صوتاً في الصباح إن كان أحد جيرانه ذئباً.' },
-        { title: 'الذئب الأبيض (Loup Blanc)', text: 'يستيقظ كل ليلتين لاصطياد ذئب آخر.' },
-        { title: 'الساحرة (Sorcière)', text: 'تستيقظ لرؤية الضحية واستخدام الشفاء أو السم.' },
-        { title: 'الغراب (Corbeau)', text: 'يستيقظ للإشارة إلى لاعب يوضع عليه صوتان غداً.' }
+      
+      // الترتيب الصحيح والمنظم للاستيقاظ ليلاً
+      const allPossibleSteps = [
+        { key: 'thief', title: 'اللص (Le Voleur)', text: 'يستيقظ ليلة البداية لتبديل دوره إن أراد.' },
+        { key: 'cupid', title: 'كيوبيد (Cupidon)', text: 'يستيقظ ليلة البداية لاختيار الحبيبين.' },
+        { key: 'chienLoup', title: 'الكلب-الذئب (Chien-Loup)', text: 'يستيقظ ليلة البداية ليقرر صفه.' },
+        { key: 'soeurs', title: 'الأختان (Deux Sœurs)', text: 'تستيقظان في الليلة الأولى فقط للتعارف.' },
+        { key: 'salvateur', title: 'الحامي (Salvateur)', text: 'يستيقظ ليختار لاعباً لحمايته من الذئاب.' },
+        { key: 'renard', title: 'الثعلب (Renard)', text: 'يستيقظ لفحص مجموعة من 3 لاعبين مجاورين.' },
+        { key: 'voyante', title: 'العرافة (Voyante)', text: 'تستيقظ لتكشف بطاقة أحد اللاعبين.' },
+        { key: 'wolf', title: 'فريق المستذئبين (Les Loups)', text: 'يستيقظ الذئاب لاختيار الضحية (وتسترق الفتاة الصغيرة النظر).' },
+        { key: 'bigWolf', title: 'الذئب الأكبر (Grand Méchant)', text: 'يستيقظ لاختيار ضحية إضافية.' },
+        { key: 'whiteWolf', title: 'الذئب الأبيض (Loup Blanc)', text: 'يستيقظ كل ليلتين لاصطياد ذئب آخر.' },
+        { key: 'bear', title: 'مروّض الدب (L\'Ours)', text: 'يصدر صوتاً في الصباح إن كان أحد جيرانه ذئباً.' },
+        { key: 'sorciere', title: 'الساحرة (Sorcière)', text: 'تستيقظ لرؤية الضحية واستخدام الشفاء أو السم.' },
+        { key: 'corbeau', title: 'الغراب (Corbeau)', text: 'يستيقظ للإشارة إلى لاعب يوضع عليه صوتان غداً.' }
       ];
 
+      // فلترة الخطوات بناءً على الأدوار الموجودة فعلياً في اللعبة
+      const activeKeys = assignedRoles.map(r => r.key);
+      const activeSteps = allPossibleSteps.filter(step => {
+        if (step.key === 'wolf') {
+          return activeKeys.includes('wolf') || activeKeys.includes('bigWolf') || activeKeys.includes('blackWolf') || activeKeys.includes('fatherWolf');
+        }
+        return activeKeys.includes(step.key);
+      });
+
       callsContainer.innerHTML = '';
-      steps.forEach((step, idx) => {
+      if (activeSteps.length === 0) {
+        callsContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 14px;">لا توجد أدوار ليلية مفعلة في هذه الجولة.</div>';
+        return;
+      }
+
+      activeSteps.forEach((step, idx) => {
         const div = document.createElement('div');
         div.className = 'call-step';
         div.innerHTML = `
