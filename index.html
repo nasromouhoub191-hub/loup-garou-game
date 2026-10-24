@@ -124,6 +124,31 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
 .promo-chip{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border:1px solid var(--gold-soft);border-radius:999px;color:var(--text);text-decoration:none;font-size:14px;font-weight:600;background:transparent;cursor:pointer}
 .promo-chip:hover{background:rgba(212,175,106,.14)}
 .promo-chip.share{background:linear-gradient(180deg,#c42c4a,#8f1a32);border-color:var(--gold);color:#fff7e6}
+
+/* قلب البطاقة ثلاثي الأبعاد */
+.flip-stage{perspective:900px}
+.tarot-back{width:190px;height:250px;margin:16px auto;border-radius:14px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:92px;color:var(--gold);
+  background:radial-gradient(circle at 50% 50%,#4a0f22,#1a0810 72%);box-shadow:inset 0 0 0 7px #1a0810,inset 0 0 0 8px var(--gold-soft),0 0 40px rgba(179,36,63,.35)}
+.flip-out{animation:flipOut .26s ease-in forwards}
+.flip-in{animation:flipIn .3s ease-out}
+@keyframes flipOut{to{transform:rotateY(90deg)}}
+@keyframes flipIn{from{transform:rotateY(-90deg)}to{transform:rotateY(0)}}
+/* تأثير الدم */
+.blood{position:fixed;inset:0;pointer-events:none;z-index:98;background:radial-gradient(circle at 50% 50%,transparent 38%,rgba(150,0,25,.55) 100%);animation:bloodFade 1.2s ease-out forwards}
+.blood i{position:absolute;border-radius:50%;transform:translate(-50%,-50%) scale(0);background:radial-gradient(circle,#c4001f 0%,#7a0014 55%,transparent 72%);animation:splat .35s ease-out forwards}
+@keyframes splat{to{transform:translate(-50%,-50%) scale(1)}}
+@keyframes bloodFade{0%,55%{opacity:1}100%{opacity:0}}
+.shake{animation:shake .45s}
+@keyframes shake{10%,90%{transform:translateX(-3px)}20%,80%{transform:translateX(5px)}30%,50%,70%{transform:translateX(-9px)}40%,60%{transform:translateX(9px)}}
+/* نبض القلب */
+#pulse{position:fixed;inset:0;pointer-events:none;z-index:97}
+#pulse.beat{animation:beat .5s ease-out}
+@keyframes beat{0%{box-shadow:inset 0 0 90px 12px rgba(210,20,55,.6)}100%{box-shadow:inset 0 0 90px 12px rgba(210,20,55,0)}}
+.timer-num.hot{color:#ff2a4d;text-shadow:0 0 18px rgba(255,30,70,.7)}
+/* تحكم المؤقت */
+.t-row{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;color:var(--muted);font-size:14px}
+.t-in{width:64px;background:rgba(0,0,0,.35);color:var(--text);border:1px solid var(--bd);border-radius:10px;padding:8px;text-align:center;font-size:16px}
+.chip{padding:6px 12px;font-size:14px}
 @media (max-width:520px){#welcome-screen h1{font-size:40px}.header-title{font-size:17px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -132,6 +157,7 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
 <body>
 
 <div id="toast" role="alert"></div>
+<div id="pulse"></div>
 
 <div id="welcome-screen">
   <div class="sponsor-badge">✨ تطبيق للعبة المستذئب ✨</div>
@@ -233,12 +259,13 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
   <div id="game-screen" class="main-wrapper" style="display:none">
     <div class="play-card">
       <h2 id="player-title" style="color:var(--yellow)"></h2>
+      <div class="flip-stage"><div id="card-back" class="tarot-back" aria-hidden="true">☾</div>
       <div id="role-card" style="display:none">
         <img id="role-img-display" class="role-img-large" src="" alt="Role">
         <h2 id="role-name" style="color:var(--red);margin:10px 0"></h2>
         <p id="role-desc" style="color:var(--muted);font-size:15px"></p>
         <p id="captain-badge" style="display:none;margin:12px 0 0;padding:10px 14px;border:1px solid var(--gold);border-radius:12px;color:var(--gold);background:rgba(212,175,106,.1);font-weight:700">👑 أنت القائد! صوتك يحتسب بصوتين.</p>
-      </div>
+      </div></div>
       <button id="action-btn" class="btn-launch" onclick="toggleRole()" style="margin-top:20px"></button>
     </div>
   </div>
@@ -259,12 +286,40 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
       <h2 style="color:var(--red);margin-top:0;text-align:center">👑 لوحة تحكم الراوي السريّة</h2>
 
       <div class="gm-box" style="text-align:center">
-        <h3 style="color:var(--yellow);margin:0">⏱️ مؤقت النقاش والتصويت (1:30)</h3>
+        <h3 style="color:var(--yellow);margin:0">⏱️ مؤقت النقاش والتصويت</h3>
         <div id="timer-display" class="timer-num">01:30</div>
-        <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+        <div style="color:var(--muted);font-size:13px">المدة المحددة: <b id="timer-total">01:30</b></div>
+        <div class="t-row">
           <button class="btn-icon-bg" onclick="startTimer()">بدء 🟢</button>
           <button class="btn-icon-bg" onclick="pauseTimer()">إيقاف ⏸️</button>
           <button class="btn-icon-bg" onclick="resetTimer()">إعادة 🔄</button>
+        </div>
+        <div class="t-row">
+          <button class="btn-icon-bg chip" onclick="adjustTimer(-15)">−15 ث</button>
+          <button class="btn-icon-bg chip" onclick="adjustTimer(15)">+15 ث</button>
+          <span>(تعديل الوقت المتبقي)</span>
+        </div>
+        <div class="t-row">
+          <button class="btn-icon-bg chip" onclick="setDuration(30)">30ث</button>
+          <button class="btn-icon-bg chip" onclick="setDuration(60)">1:00</button>
+          <button class="btn-icon-bg chip" onclick="setDuration(90)">1:30</button>
+          <button class="btn-icon-bg chip" onclick="setDuration(120)">2:00</button>
+          <button class="btn-icon-bg chip" onclick="setDuration(180)">3:00</button>
+          <button class="btn-icon-bg chip" onclick="setDuration(300)">5:00</button>
+        </div>
+        <div class="t-row">
+          <span>مدة مخصصة:</span>
+          <input id="t-min" class="t-in" type="number" min="0" max="60" value="1" inputmode="numeric" aria-label="دقائق"> <span>د</span>
+          <input id="t-sec" class="t-in" type="number" min="0" max="59" value="30" inputmode="numeric" aria-label="ثوانٍ"> <span>ث</span>
+          <button class="btn-icon-bg chip" onclick="applyCustom()">تعيين</button>
+        </div>
+        <div class="t-row">
+          <label style="display:flex;align-items:center;gap:6px;cursor:pointer"><input type="checkbox" id="hb-on" class="checkbox-custom" checked onchange="saveTimerPrefs()"> 💓 نبض القلب</label>
+          <span>في آخر</span>
+          <select id="hb-from" class="t-in" style="width:auto" onchange="saveTimerPrefs();updateTimerDisplay()">
+            <option>5</option><option selected>10</option><option>15</option><option>20</option>
+          </select>
+          <span>ثانية</span>
         </div>
       </div>
 
@@ -356,7 +411,7 @@ let assignedRoles = [];
 let centerCards = [];
 let captainOn = false, captainIdx = -1;
 let currentIdx = 0, isShowing = false;
-let timerInterval = null, timeLeft = 90;
+let timerInterval = null, timeLeft = 90, timerTotal = 90, flipBusy = false;
 let nightNum = 1;
 let toastTimer = null;
 
@@ -514,7 +569,11 @@ function finishDeal(){
 
 function updatePlayerUI(){
   $('player-title').innerText = `مرر الهاتف للاعب رقم ${currentIdx + 1}`;
+  flipBusy = false;
   $('role-card').style.display = 'none';
+  $('role-card').classList.remove('flip-in','flip-out');
+  $('card-back').classList.remove('flip-out');
+  $('card-back').style.display = 'block';
   $('role-img-display').src = '';
   $('role-name').innerText = '';
   $('captain-badge').style.display = 'none';
@@ -524,25 +583,39 @@ function updatePlayerUI(){
 }
 
 function toggleRole(){
+  if (flipBusy) return;
+  flipBusy = true;
   if (!isShowing) {
     const role = assignedRoles[currentIdx];
     $('role-img-display').src = role.img;
     $('role-name').innerText = role.name;
     $('role-desc').innerText = role.desc;
     $('captain-badge').style.display = currentIdx === captainIdx ? 'block' : 'none';
-    $('role-card').style.display = 'block';
     $('action-btn').innerText = 'إخفاء وتمرير الهاتف للاعب التالي 📲';
     isShowing = true;
+    if (navigator.vibrate) navigator.vibrate(25);
+    const back = $('card-back'), rc = $('role-card');
+    back.classList.add('flip-out');            // الوجه الخلفي يدور 90°
+    setTimeout(() => {
+      back.style.display = 'none'; back.classList.remove('flip-out');
+      rc.style.display = 'block'; rc.classList.add('flip-in');   // ثم يظهر الدور من الجهة الأخرى
+      setTimeout(() => { rc.classList.remove('flip-in'); flipBusy = false; }, 300);
+    }, 260);
   } else {
-    currentIdx++;
-    if (currentIdx < assignedRoles.length) updatePlayerUI();
-    else {
-      $('role-card').style.display = 'none';
-      $('role-img-display').src = '';
-      $('captain-badge').style.display = 'none';
-      $('game-screen').style.display = 'none';
-      $('pass-to-gm-screen').style.display = 'block';
-    }
+    $('role-card').classList.add('flip-out');
+    setTimeout(() => {
+      currentIdx++;
+      if (currentIdx < assignedRoles.length) updatePlayerUI();
+      else {
+        flipBusy = false;
+        $('role-card').style.display = 'none';
+        $('role-card').classList.remove('flip-out');
+        $('role-img-display').src = '';
+        $('captain-badge').style.display = 'none';
+        $('game-screen').style.display = 'none';
+        $('pass-to-gm-screen').style.display = 'block';
+      }
+    }, 260);
   }
 }
 
@@ -597,6 +670,7 @@ function togglePlayerStatus(i){
   const b = row.querySelector('.status-btn');
   b.className = `status-btn ${a ? 'btn-kill' : 'btn-revive'}`;
   b.innerText = a ? 'قتل 💀' : 'إحياء 🟢';
+  if (!a) bloodSplash();
   renderGMNightCalls();
 }
 
@@ -630,27 +704,110 @@ function renderGMNightCalls(){
   });
 }
 
-/* ===== المؤقت ===== */
+/* ===== المؤقت والنبض والدم ===== */
+let hbCtx = null;
+const fmt = sec => String(Math.floor(sec / 60)).padStart(2, '0') + ':' + String(sec % 60).padStart(2, '0');
+const hbFrom = () => +$('hb-from').value || 10;
+function getCtx(){
+  try {
+    const AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+    hbCtx = hbCtx || new AC(); if (hbCtx.state === 'suspended') hbCtx.resume();
+    return hbCtx;
+  } catch (e) { return null; }
+}
+function loadTimer(){
+  try {
+    const v = +localStorage.getItem('wg_timer'); if (v >= 5 && v <= 3600) timerTotal = v;
+    const h = localStorage.getItem('wg_hbfrom'); if (h) $('hb-from').value = h;
+    const on = localStorage.getItem('wg_hb'); if (on !== null) $('hb-on').checked = on === '1';
+  } catch (e) {}
+  timeLeft = timerTotal;
+  $('t-min').value = Math.floor(timerTotal / 60); $('t-sec').value = timerTotal % 60;
+  updateTimerDisplay();
+}
+function saveTimerPrefs(){
+  try {
+    localStorage.setItem('wg_timer', timerTotal);
+    localStorage.setItem('wg_hbfrom', $('hb-from').value);
+    localStorage.setItem('wg_hb', $('hb-on').checked ? '1' : '0');
+  } catch (e) {}
+}
+function setDuration(sec){
+  timerTotal = Math.max(5, Math.min(3600, Math.round(sec)));
+  pauseTimer(); timeLeft = timerTotal;
+  $('t-min').value = Math.floor(timerTotal / 60); $('t-sec').value = timerTotal % 60;
+  saveTimerPrefs(); updateTimerDisplay();
+}
+function applyCustom(){
+  const sec = (+$('t-min').value || 0) * 60 + (+$('t-sec').value || 0);
+  if (sec < 5) return toast('أقل مدة هي 5 ثوانٍ.');
+  setDuration(sec);
+}
+function adjustTimer(d){
+  timeLeft = Math.max(0, Math.min(3600, timeLeft + d));
+  updateTimerDisplay();
+}
+function pulse(){
+  const p = $('pulse'); p.classList.remove('beat'); void p.offsetWidth; p.classList.add('beat');
+}
+// نبضة قلب: "دَبّ-دُبّ" مولّدة برمجياً، وتزداد قوة كلما اقترب الوقت من الصفر
+function heartbeat(left){
+  if (!$('hb-on').checked) return;
+  pulse();
+  if (navigator.vibrate) navigator.vibrate(left === 0 ? [300, 120, 300] : [60, 90, 60]);
+  const ctx = getCtx(); if (!ctx) return;
+  const vol = Math.min(1, .45 + (hbFrom() - left) * .05), t = ctx.currentTime + .02;
+  const thump = (t0, v) => {
+    [['sine', 80, 40, 1], ['triangle', 150, 70, .5]].forEach(([type, f0, f1, k]) => {
+      const o = ctx.createOscillator(), g = ctx.createGain(); o.type = type;
+      o.frequency.setValueAtTime(f0, t0); o.frequency.exponentialRampToValueAtTime(f1, t0 + .15);
+      g.gain.setValueAtTime(0, t0); g.gain.linearRampToValueAtTime(v * k, t0 + .012);
+      g.gain.exponentialRampToValueAtTime(.001, t0 + .24);
+      o.connect(g); g.connect(ctx.destination); o.start(t0); o.stop(t0 + .26);
+    });
+  };
+  thump(t, vol); thump(t + .21, vol * .75);
+}
+function tick(){
+  if (timeLeft > 0) timeLeft--;
+  if (timeLeft <= 0) {
+    pauseTimer(); timeLeft = 0; updateTimerDisplay();
+    heartbeat(0);
+    toast('⏰ انتهى وقت النقاش والتصويت!');
+    return;
+  }
+  updateTimerDisplay();
+  if (timeLeft <= hbFrom()) heartbeat(timeLeft);
+}
 function startTimer(){
   if (timerInterval) return;
-  if (timeLeft <= 0) { timeLeft = 90; updateTimerDisplay(); }
-  timerInterval = setInterval(() => {
-    if (timeLeft > 0) {
-      timeLeft--; updateTimerDisplay();
-      if (timeLeft === 0) {
-        clearInterval(timerInterval); timerInterval = null;
-        toast('⏰ انتهى وقت النقاش والتصويت!');
-        if (navigator.vibrate) navigator.vibrate([300, 150, 300]);
-      }
-    }
-  }, 1000);
+  if (timeLeft <= 0) timeLeft = timerTotal;
+  getCtx(); // يُفعَّل الصوت من لمسة المستخدم
+  timerInterval = setInterval(tick, 1000);
+  updateTimerDisplay();
 }
-function pauseTimer(){ clearInterval(timerInterval); timerInterval = null; }
-function resetTimer(){ pauseTimer(); timeLeft = 90; updateTimerDisplay(); }
+function pauseTimer(){ clearInterval(timerInterval); timerInterval = null; updateTimerDisplay(); }
+function resetTimer(){ pauseTimer(); timeLeft = timerTotal; updateTimerDisplay(); }
 function updateTimerDisplay(){
-  const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-  const s = String(timeLeft % 60).padStart(2, '0');
-  $('timer-display').innerText = `${m}:${s}`;
+  const d = $('timer-display'); if (!d) return;
+  d.innerText = fmt(timeLeft);
+  $('timer-total').innerText = fmt(timerTotal);
+  d.classList.toggle('hot', !!timerInterval && timeLeft > 0 && timeLeft <= hbFrom());
+}
+
+// رشة دم + اهتزاز الشاشة عند قتل لاعب
+function bloodSplash(){
+  if (navigator.vibrate) navigator.vibrate([40, 30, 90]);
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const o = document.createElement('div'); o.className = 'blood';
+  for (let i = 0; i < 9; i++) {
+    const d = document.createElement('i'), sz = 70 + Math.random() * 170;
+    d.style.cssText = `left:${8 + Math.random() * 84}%;top:${8 + Math.random() * 84}%;width:${sz}px;height:${sz}px;animation-delay:${Math.random() * .15}s`;
+    o.appendChild(d);
+  }
+  document.body.appendChild(o);
+  const gm = $('gm-screen'); gm.classList.remove('shake'); void gm.offsetWidth; gm.classList.add('shake');
+  setTimeout(() => { o.remove(); gm.classList.remove('shake'); }, 1300);
 }
 
 /* ===== إعادة اللعبة (بدون إعادة تحميل الصفحة) ===== */
@@ -784,6 +941,7 @@ function initHero(){
 buildSetup();
 renderPromo();
 initHero();
+loadTimer();
 </script>
 </body>
 </html>
