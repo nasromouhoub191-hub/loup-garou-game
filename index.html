@@ -701,14 +701,17 @@ function renderPromo(){
   document.querySelectorAll('[data-promo]').forEach(el => el.innerHTML = html);
 }
 async function shareApp(){
-  const url = location.href.split('#')[0];
+  // رابط Mediafire الذي ترغب في استخدامه للمشاركة
+  const mediafireUrl = 'https://www.mediafire.com/file/y6irfcvqwe5gf1t/nasro-loup-garou.apk/file';
   try {
-    if (navigator.share) { await navigator.share({title: document.title, text: PROMO.shareText, url}); return; }
-    await navigator.clipboard.writeText(PROMO.shareText + ' ' + url);
-    toast('تم نسخ رابط اللعبة ✅');
+    if (navigator.share) { 
+      await navigator.share({title: document.title, text: PROMO.shareText, url: mediafireUrl}); 
+      return; 
+    }
+    await navigator.clipboard.writeText(PROMO.shareText + ' ' + mediafireUrl);
+    toast('تم نسخ رابط التحميل ✅');
   } catch (e) { /* ألغى المستخدم المشاركة */ }
 }
-
 /* ===== الذئب التفاعلي ===== */
 function initHero(){
   const art = document.querySelector('.hero-art'); if (!art) return;
