@@ -81,6 +81,15 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
 .call-num{background:transparent;border:1px solid var(--gold);color:var(--gold);font-weight:700;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
 #gm-notes{background:rgba(0,0,0,.3)!important;color:var(--text)!important}
 #toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#8f1a32;border:1px solid var(--gold);color:#fff7e6;padding:12px 22px;border-radius:12px;font-weight:700;display:none;z-index:99;max-width:90%;text-align:center}
+
+/* حركة القرعة */
+.deal-stage{position:relative;width:170px;height:250px;margin:70px auto 30px}
+.deal-card{position:absolute;inset:0;border-radius:14px;border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:54px;
+  background:radial-gradient(circle at 50% 50%,#2a2160,#14173a 70%);box-shadow:inset 0 0 0 5px #14173a,inset 0 0 0 6px var(--gold-soft),0 8px 20px rgba(0,0,0,.5);
+  transform:translateY(calc(var(--i)*-2px));transition:transform .55s cubic-bezier(.3,.7,.3,1),opacity .55s}
+.deal-stage.shuffling .deal-card{animation:shuf .6s ease-in-out calc(var(--i)*60ms) 2}
+@keyframes shuf{0%,100%{transform:translateY(calc(var(--i)*-2px))}30%{transform:translate(-95px,calc(var(--i)*-2px)) rotate(-9deg)}70%{transform:translate(95px,calc(var(--i)*-2px)) rotate(9deg)}}
+#deal-text{text-align:center;font-family:'Aref Ruqaa',serif;font-size:24px;color:var(--gold);margin:0 0 16px}
 @media (max-width:520px){#welcome-screen h1{font-size:40px}.header-title{font-size:17px}}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -139,6 +148,13 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1
 
     <!-- وحدة إعلانية: استبدل data-ad-slot برقم وحدتك من AdSense -->
     <ins class="adsbygoogle" style="display:block;margin-top:20px" data-ad-client="ca-pub-1324512454522157" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  </div>
+
+  <!-- شاشة القرعة -->
+  <div id="shuffle-screen" class="main-wrapper" style="display:none;text-align:center;overflow:hidden">
+    <div class="deal-stage" id="deal-stage"></div>
+    <p id="deal-text">تُخلط الأوراق...</p>
+    <button class="btn-icon-bg" onclick="finishDeal()">تخطي</button>
   </div>
 
   <!-- كشف الأدوار -->
@@ -375,6 +391,38 @@ function startGame(){
   shuffle(assignedRoles);
   currentIdx = 0; nightNum = 1;
   $('setup-screen').style.display = 'none';
+  runDeal(total);
+}
+
+/* ===== حركة القرعة ===== */
+let dealTimers = [];
+function clearDeal(){ dealTimers.forEach(clearTimeout); dealTimers = []; }
+function runDeal(total){
+  clearDeal();
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return finishDeal();
+  const stage = $('deal-stage');
+  const n = Math.min(total, 9);
+  stage.className = 'deal-stage';
+  stage.innerHTML = Array.from({length:n}, (_, i) => `<div class="deal-card" style="--i:${i}">🐺</div>`).join('');
+  $('deal-text').innerText = 'تُخلط الأوراق...';
+  $('shuffle-screen').style.display = 'block';
+  requestAnimationFrame(() => stage.classList.add('shuffling'));
+  dealTimers.push(setTimeout(() => {
+    stage.classList.remove('shuffling');
+    $('deal-text').innerText = 'تُوزَّع الأدوار...';
+    [...stage.children].forEach((c, i) => {
+      const dir = i % 2 ? 1 : -1;
+      const dx = dir * (230 + Math.random() * 90), dy = (Math.random() - .5) * 120;
+      c.style.transitionDelay = (i * 110) + 'ms';
+      c.style.transform = `translate(${dx}px,${dy}px) rotate(${dir * (20 + Math.random() * 25)}deg)`;
+      c.style.opacity = 0;
+    });
+  }, 1500));
+  dealTimers.push(setTimeout(finishDeal, 1500 + n * 110 + 650));
+}
+function finishDeal(){
+  clearDeal();
+  $('shuffle-screen').style.display = 'none';
   $('game-screen').style.display = 'block';
   updatePlayerUI();
 }
@@ -522,7 +570,8 @@ function resetGame(){
   resetTimer();
   assignedRoles = []; centerCards = [];
   currentIdx = 0; isShowing = false; nightNum = 1;
-  ['game-screen','pass-to-gm-screen','gm-screen'].forEach(id => $(id).style.display = 'none');
+  clearDeal();
+  ['shuffle-screen','game-screen','pass-to-gm-screen','gm-screen'].forEach(id => $(id).style.display = 'none');
   $('setup-screen').style.display = 'block';
   $('role-img-display').src = '';
   $('gm-notes').value = '';
