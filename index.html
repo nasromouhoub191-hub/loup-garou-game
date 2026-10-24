@@ -1,931 +1,499 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>تطبيق المستذئبين - MADE BY NASRO MHB</title>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1324512454522157"
-     crossorigin="anonymous"></script>
-  <style>
-    :root {
-      --bg-dark: #0b0e17;
-      --card-bg: #121829;
-      --card-border: #1e293b;
-      --accent-red: #f43f5e;
-      --accent-purple: #a855f7;
-      --accent-yellow: #f59e0b;
-      --accent-blue: #0284c7;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-    }
-
-    * {
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    body {
-      background-color: var(--bg-dark);
-      color: var(--text-main);
-      margin: 0;
-      padding: 0;
-      direction: rtl;
-    }
-
-    #welcome-screen {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      background: radial-gradient(circle at center, #1e1b4b 0%, #0b0e17 100%);
-      padding: 20px;
-      text-align: center;
-    }
-
-    .sponsor-badge {
-      background: rgba(244, 63, 94, 0.15);
-      border: 1px solid var(--accent-red);
-      color: var(--accent-yellow);
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .sponsor-name {
-      font-size: 32px;
-      font-weight: 900;
-      color: #fff;
-      text-shadow: 0 0 20px rgba(244, 63, 94, 0.6);
-      margin: 10px 0;
-    }
-
-    .btn-start-game {
-      background: linear-gradient(135deg, var(--accent-red), #be123c);
-      color: white;
-      border: none;
-      padding: 16px 45px;
-      border-radius: 30px;
-      font-size: 20px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 10px 25px rgba(244, 63, 94, 0.4);
-      margin-top: 25px;
-    }
-
-    .app-header {
-      background-color: #0d111d;
-      border-bottom: 1px solid var(--card-border);
-      padding: 12px 25px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .header-title {
-      font-size: 18px;
-      font-weight: bold;
-      color: var(--text-main);
-    }
-
-    .top-bar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 1100px;
-      margin: 20px auto 10px;
-      padding: 0 15px;
-    }
-
-    .btn-icon-bg {
-      background: #1e293b;
-      border: 1px solid #334155;
-      color: var(--text-main);
-      padding: 8px 16px;
-      border-radius: 10px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .main-wrapper {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 15px 40px;
-    }
-
-    .section-box {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    .section-title {
-      font-size: 22px;
-      font-weight: bold;
-      margin-bottom: 15px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .section-title.wolf { color: var(--accent-purple); }
-    .section-title.village { color: #38bdf8; }
-    .section-title.neutral { color: var(--accent-yellow); }
-
-    .roles-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 12px;
-    }
-
-    .role-card-item {
-      background: #0f1422;
-      border: 1px solid #1e293b;
-      border-radius: 12px;
-      padding: 12px 16px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .role-info {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .role-img-thumb {
-      width: 42px;
-      height: 42px;
-      border-radius: 8px;
-      object-fit: cover;
-      border: 1px solid var(--card-border);
-      background: #1e293b;
-    }
-
-    .role-name-ar {
-      font-weight: bold;
-      font-size: 15px;
-    }
-
-    .role-name-fr {
-      font-size: 11px;
-      color: var(--text-muted);
-    }
-
-    .counter-group {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: #182035;
-      padding: 4px 8px;
-      border-radius: 8px;
-    }
-
-    .counter-btn {
-      background: #263352;
-      color: white;
-      border: none;
-      width: 28px;
-      height: 28px;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .checkbox-custom {
-      width: 18px;
-      height: 18px;
-      cursor: pointer;
-    }
-
-    .btn-launch {
-      width: 100%;
-      background: linear-gradient(90deg, var(--accent-red), var(--accent-purple));
-      border: none;
-      color: white;
-      padding: 18px;
-      font-size: 20px;
-      font-weight: bold;
-      border-radius: 14px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .play-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 30px;
-      max-width: 500px;
-      margin: 30px auto;
-      text-align: center;
-    }
-
-    .role-img-large {
-      width: 140px;
-      height: 140px;
-      border-radius: 16px;
-      object-fit: cover;
-      border: 3px solid var(--accent-purple);
-      margin: 15px auto;
-      box-shadow: 0 0 25px rgba(168, 85, 247, 0.4);
-    }
-
-    .timer-num {
-      font-size: 48px;
-      font-weight: 900;
-      color: var(--accent-red);
-      font-family: monospace;
-      margin: 15px 0;
-    }
-
-    .player-row {
-      background: #0f1422;
-      padding: 12px;
-      border-radius: 10px;
-      border: 1px solid var(--card-border);
-      margin-bottom: 10px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s;
-    }
-
-    .player-row.dead {
-      background: rgba(244, 63, 94, 0.15);
-      border-color: var(--accent-red);
-      opacity: 0.7;
-    }
-
-    .player-row.dead .p-name {
-      text-decoration: line-through;
-      color: var(--accent-red);
-    }
-
-    .status-btn {
-      padding: 6px 12px;
-      border-radius: 6px;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .btn-kill { background: var(--accent-red); color: white; }
-    .btn-revive { background: #10b981; color: white; }
-
-    .call-step {
-      background: #0f1422;
-      border-right: 4px solid var(--accent-blue);
-      padding: 12px 15px;
-      border-radius: 8px;
-      margin-bottom: 10px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .call-num {
-      background: var(--accent-blue);
-      color: white;
-      font-weight: bold;
-      width: 26px;
-      height: 26px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>تطبيق المستذئبين - MADE BY NASRO MHB</title>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1324512454522157" crossorigin="anonymous"></script>
 <link rel="manifest" href="manifest.json">
+<style>
+:root{--bg:#0b0e17;--card:#121829;--bd:#1e293b;--red:#f43f5e;--purple:#a855f7;--yellow:#f59e0b;--blue:#0284c7;--text:#f8fafc;--muted:#94a3b8}
+*{box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
+body{background:var(--bg);color:var(--text);margin:0;direction:rtl}
+#welcome-screen{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;background:radial-gradient(circle at center,#1e1b4b 0%,#0b0e17 100%);padding:20px;text-align:center}
+.sponsor-badge{background:rgba(244,63,94,.15);border:1px solid var(--red);color:var(--yellow);padding:8px 18px;border-radius:20px;font-size:14px;font-weight:bold;margin-bottom:15px}
+.sponsor-name{font-size:32px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(244,63,94,.6);margin:10px 0}
+.btn-start-game{background:linear-gradient(135deg,var(--red),#be123c);color:#fff;border:none;padding:16px 45px;border-radius:30px;font-size:20px;font-weight:bold;cursor:pointer;box-shadow:0 10px 25px rgba(244,63,94,.4);margin-top:25px}
+.app-header{background:#0d111d;border-bottom:1px solid var(--bd);padding:12px 25px;display:flex;justify-content:space-between;align-items:center}
+.header-title{font-size:18px;font-weight:bold}
+.top-bar{display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:20px auto 10px;padding:0 15px}
+.btn-icon-bg{background:#1e293b;border:1px solid #334155;color:var(--text);padding:8px 16px;border-radius:10px;cursor:pointer;font-weight:bold}
+.main-wrapper{max-width:1100px;margin:0 auto;padding:0 15px 40px}
+.section-box{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:20px}
+.section-title{font-size:22px;font-weight:bold;margin-bottom:15px;display:flex;align-items:center;gap:10px}
+.section-title.wolf{color:var(--purple)}.section-title.village{color:#38bdf8}.section-title.neutral{color:var(--yellow)}
+.section-title small{font-size:14px;color:var(--muted)}
+.roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
+.role-card-item{background:#0f1422;border:1px solid var(--bd);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.role-info{display:flex;align-items:center;gap:12px}
+.role-img-thumb{width:42px;height:42px;border-radius:8px;object-fit:cover;border:1px solid var(--bd);background:#1e293b}
+.role-name-ar{font-weight:bold;font-size:15px}
+.role-name-fr{font-size:11px;color:var(--muted)}
+.counter-group{display:flex;align-items:center;gap:10px;background:#182035;padding:4px 8px;border-radius:8px}
+.counter-btn{background:#263352;color:#fff;border:none;width:28px;height:28px;border-radius:6px;font-weight:bold;cursor:pointer}
+.count-num{font-weight:bold;min-width:18px;text-align:center}
+.checkbox-custom{width:18px;height:18px;cursor:pointer}
+.btn-launch{width:100%;background:linear-gradient(90deg,var(--red),var(--purple));border:none;color:#fff;padding:18px;font-size:20px;font-weight:bold;border-radius:14px;cursor:pointer;margin-top:10px}
+.play-card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:30px;max-width:500px;margin:30px auto;text-align:center}
+.role-img-large{width:140px;height:140px;border-radius:16px;object-fit:cover;border:3px solid var(--purple);margin:15px auto;box-shadow:0 0 25px rgba(168,85,247,.4)}
+.timer-num{font-size:48px;font-weight:900;color:var(--red);font-family:monospace;margin:15px 0}
+.player-row{background:#0f1422;padding:12px;border-radius:10px;border:1px solid var(--bd);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;transition:all .3s}
+.player-row.dead{background:rgba(244,63,94,.15);border-color:var(--red);opacity:.7}
+.player-row.dead .p-name{text-decoration:line-through;color:var(--red)}
+.status-btn{padding:6px 12px;border-radius:6px;border:none;font-weight:bold;cursor:pointer;font-size:13px;color:#fff}
+.btn-kill{background:var(--red)}.btn-revive{background:#10b981}
+.call-step{background:#0f1422;border-right:4px solid var(--blue);padding:12px 15px;border-radius:8px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.call-num{background:var(--blue);color:#fff;font-weight:bold;min-width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
+.gm-box{background:#0f1422;border-radius:12px;padding:15px;margin-bottom:20px;border:1px solid var(--bd)}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;padding:12px 22px;border-radius:12px;font-weight:bold;display:none;z-index:99;max-width:90%;text-align:center}
+</style>
 </head>
 <body>
 
-  <!-- شاشة الدخول الرئيسية -->
-  <div id="welcome-screen">
-    <div class="sponsor-badge">✨ تطبيق للعبة المستذئب ✨</div>
-    <div class="sponsor-name">من صنع NASRO MHB</div>
-    <div style="color: var(--text-muted); font-size: 14px; margin-bottom: 20px;">MADE BY NASRO MHB</div>
-    <div style="font-size: 80px; margin: 10px 0;">🐺</div>
-    <h1 style="color: var(--accent-red); margin: 0;">LOUP-GAROU</h1>
-    <p style="color: var(--text-muted); font-size: 15px;">تطبيق توزيع الأدوار والقرعة للعب مع الأصدقاء</p>
-    <button class="btn-start-game" onclick="enterApp()">دخول اللعبة 🎲</button>
+<div id="toast" role="alert"></div>
+
+<div id="welcome-screen">
+  <div class="sponsor-badge">✨ تطبيق للعبة المستذئب ✨</div>
+  <div class="sponsor-name">من صنع NASRO MHB</div>
+  <div style="color:var(--muted);font-size:14px;margin-bottom:20px">MADE BY NASRO MHB</div>
+  <div style="font-size:80px;margin:10px 0">🐺</div>
+  <h1 style="color:var(--red);margin:0">LOUP-GAROU</h1>
+  <p style="color:var(--muted);font-size:15px">تطبيق توزيع الأدوار والقرعة للعب مع الأصدقاء</p>
+  <button class="btn-start-game" onclick="enterApp()">دخول اللعبة 🎲</button>
+</div>
+
+<div id="app-content" style="display:none">
+  <div class="app-header">
+    <div class="header-title">تطبيق المستذئبين - Loup Garou App</div>
+    <div style="color:var(--yellow);font-weight:bold;font-size:14px">من صنع NASRO MHB</div>
   </div>
 
-  <!-- محتوى التطبيق -->
-  <div id="app-content" style="display: none;">
-    
-    <div class="app-header">
-      <div class="header-title">تطبيق المستذئبين - Loup Garou App</div>
-      <div style="color: var(--accent-yellow); font-weight: bold; font-size: 14px;">من صنع NASRO MHB</div>
+  <!-- الإعدادات -->
+  <div id="setup-screen" class="main-wrapper">
+    <div class="top-bar">
+      <button class="btn-icon-bg" onclick="toggleGuide()">📖 دليل الأدوار</button>
+      <button class="btn-icon-bg" onclick="resetGame()">🔄 إعادة البدء</button>
     </div>
 
-    <!-- شاشة الإعدادات -->
-    <div id="setup-screen" class="main-wrapper">
-      
-      <div class="top-bar">
-        <button class="btn-icon-bg" onclick="toggleGuide()">📖 دليل الأدوار</button>
-        <button class="btn-icon-bg" onclick="location.reload()">🔄 إعادة البدء</button>
-      </div>
+    <div id="guide-box" class="section-box" style="display:none"></div>
 
-      <!-- دليل الأدوار -->
-      <div id="guide-box" class="section-box" style="display: none;">
-        <h3 style="color: var(--accent-yellow); margin-top: 0;">📖 شرح الأدوار والقواعد</h3>
-        <p>• <b>الذئاب:</b> يستيقظون ليلاً لاختيار الضحية.</p>
-        <p>• <b>العرافة:</b> تكشف دور لاعب واحد كل ليلة.</p>
-        <p>• <b>الساحرة:</b> تملك جرعة شفاء وجرعة قتل.</p>
-      </div>
-
-      <!-- قسم الذئاب -->
-      <div class="section-box">
-        <div class="section-title wolf">🐺 المستذئبون <span style="font-size: 14px; color: var(--text-muted);">(Loup-Garou)</span></div>
-        <div class="roles-grid">
-          
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Les_Loups_Garous_noir.jpg" class="role-img-thumb" alt="Loup">
-              <div>
-                <div class="role-name-ar">ذئب عادي</div>
-                <div class="role-name-fr">(Loup-Garou)</div>
-              </div>
-            </div>
-            <div class="counter-group">
-              <button class="counter-btn" onclick="changeCount('normalWolf', -1)">-</button>
-              <span id="normalWolf-count" style="font-weight: bold; width: 15px; text-align: center;">2</span>
-              <button class="counter-btn" onclick="changeCount('normalWolf', 1)">+</button>
-            </div>
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Grand-MeFchant-Loup.jpg" class="role-img-thumb" alt="Grand Méchant">
-              <div>
-                <div class="role-name-ar">الذئب الأكبر</div>
-                <div class="role-name-fr">(Grand Méchant)</div>
-              </div>
-            </div>
-            <div class="counter-group">
-              <button class="counter-btn" onclick="changeCount('bigWolf', -1)">-</button>
-              <span id="bigWolf-count" style="font-weight: bold; width: 15px; text-align: center;">1</span>
-              <button class="counter-btn" onclick="changeCount('bigWolf', 1)">+</button>
-            </div>
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Les_Loups_Garous_noir.jpg" class="role-img-thumb" alt="Loup Noir">
-              <div>
-                <div class="role-name-ar">الذئب الأسود</div>
-                <div class="role-name-fr">(Loup Noir)</div>
-              </div>
-            </div>
-            <div class="counter-group">
-              <button class="counter-btn" onclick="changeCount('blackWolf', -1)">-</button>
-              <span id="blackWolf-count" style="font-weight: bold; width: 15px; text-align: center;">0</span>
-              <button class="counter-btn" onclick="changeCount('blackWolf', 1)">+</button>
-            </div>
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Loup Blanc.jpg" class="role-img-thumb" alt="Loup Blanc">
-              <div>
-                <div class="role-name-ar">الذئب الأبيض</div>
-                <div class="role-name-fr">(Loup Blanc)</div>
-              </div>
-            </div>
-            <div class="counter-group">
-              <button class="counter-btn" onclick="changeCount('whiteWolf', -1)">-</button>
-              <span id="whiteWolf-count" style="font-weight: bold; width: 15px; text-align: center;">0</span>
-              <button class="counter-btn" onclick="changeCount('whiteWolf', 1)">+</button>
-            </div>
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Père des Loups.jpg" class="role-img-thumb" alt="Père des Loups">
-              <div>
-                <div class="role-name-ar">أب الذئاب</div>
-                <div class="role-name-fr">(Père des Loups)</div>
-              </div>
-            </div>
-            <div class="counter-group">
-              <button class="counter-btn" onclick="changeCount('fatherWolf', -1)">-</button>
-              <span id="fatherWolf-count" style="font-weight: bold; width: 15px; text-align: center;">0</span>
-              <button class="counter-btn" onclick="changeCount('fatherWolf', 1)">+</button>
-            </div>
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Chien-Loup.jpg" class="role-img-thumb" alt="Chien-Loup">
-              <div>
-                <div class="role-name-ar">الكلب-الذئب</div>
-                <div class="role-name-fr">(Chien-Loup)</div>
-              </div>
-            </div>
-            <div class="counter-group">
-              <button class="counter-btn" onclick="changeCount('chienLoup', -1)">-</button>
-              <span id="chienLoup-count" style="font-weight: bold; width: 15px; text-align: center;">0</span>
-              <button class="counter-btn" onclick="changeCount('chienLoup', 1)">+</button>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <!-- أدوار القرية الخاصة -->
-      <div class="section-box">
-        <div class="section-title village">🛡️ أدوار القرية الخاصة <span style="font-size: 14px; color: var(--text-muted);">(Le Village)</span></div>
-        <div class="roles-grid">
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Capitaine.jpg" class="role-img-thumb" alt="Capitaine">
-              <div><div class="role-name-ar">القائد / العمدة</div><div class="role-name-fr">(Le Capitaine)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="captain">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Voyante.jpg" class="role-img-thumb" alt="Voyante">
-              <div><div class="role-name-ar">العرافة</div><div class="role-name-fr">(Voyante)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="voyante" checked>
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Sorcière.jpg" class="role-img-thumb" alt="Sorcière">
-              <div><div class="role-name-ar">الساحرة</div><div class="role-name-fr">(Sorcière)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="sorciere" checked>
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Chasseur.jpg" class="role-img-thumb" alt="Chasseur">
-              <div><div class="role-name-ar">الصياد</div><div class="role-name-fr">(Chasseur)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="chasseur" checked>
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="الفتاة الصغيرة.jpg" class="role-img-thumb" alt="Petite Fille">
-              <div><div class="role-name-ar">الفتاة الصغيرة</div><div class="role-name-fr">(Petite Fille)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="petiteFille" checked>
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Renard.jpg" class="role-img-thumb" alt="Renard">
-              <div><div class="role-name-ar">الثعلب</div><div class="role-name-fr">(Renard)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="renard">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Corbeau.jpg" class="role-img-thumb" alt="Corbeau">
-              <div><div class="role-name-ar">الغراب</div><div class="role-name-fr">(Corbeau)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="corbeau">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Salvateur.jpg" class="role-img-thumb" alt="Salvateur">
-              <div><div class="role-name-ar">الحامي</div><div class="role-name-fr">(Salvateur)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="salvateur">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Ancien (1).jpg" class="role-img-thumb" alt="Ancien">
-              <div><div class="role-name-ar">العجوز / العميد</div><div class="role-name-fr">(L'Ancien)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="ancien">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="كبش الفداء.jpg" class="role-img-thumb" alt="Bouc">
-              <div><div class="role-name-ar">كبش الفداء</div><div class="role-name-fr">(Bouc Émissaire)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="bouc">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Idiot du village.jpg" class="role-img-thumb" alt="Idiot">
-              <div><div class="role-name-ar">أحمق القرية</div><div class="role-name-fr">(Idiot du Village)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="idiot">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Deux Sœurs.jpg" class="role-img-thumb" alt="Soeurs">
-              <div><div class="role-name-ar">الأختان</div><div class="role-name-fr">(Deux Sœurs)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="soeurs">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Chevalier à l'Épée Rouillée.jpg" class="role-img-thumb" alt="Chevalier">
-              <div><div class="role-name-ar">الفارس بسيف صدئ</div><div class="role-name-fr">(Chevalier à l'Épée)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="chevalier">
-          </div>
-
-          <!-- الشخصيات الجديدة -->
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Ours.jpg" class="role-img-thumb" alt="Ours">
-              <div><div class="role-name-ar">مروّض الدب</div><div class="role-name-fr">(L'Ours)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="bear">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Cupidon.jpg" class="role-img-thumb" alt="Cupidon">
-              <div><div class="role-name-ar">كيوبيد</div><div class="role-name-fr">(Cupidon)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="cupid">
-          </div>
-
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Voleur.jpg" class="role-img-thumb" alt="Voleur">
-              <div><div class="role-name-ar">اللص</div><div class="role-name-fr">(Le Voleur)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="thief">
-          </div>
-
-        </div>
-      </div>
-
-      <!-- الأدوار المحايدة -->
-      <div class="section-box">
-        <div class="section-title neutral">🎭 الأدوار المحايدة <span style="font-size: 14px; color: var(--text-muted);">(Neutres)</span></div>
-        <div class="roles-grid">
-          <div class="role-card-item">
-            <div class="role-info">
-              <img src="Ange.jpg" class="role-img-thumb" alt="Ange">
-              <div><div class="role-name-ar">الملاك</div><div class="role-name-fr">(L'Ange)</div></div>
-            </div>
-            <input type="checkbox" class="checkbox-custom" id="ange">
-          </div>
-        </div>
-      </div>
-
-      <!-- القرويين -->
-      <div class="section-box">
-        <div class="role-card-item" style="background: transparent; border: none; padding: 0;">
-          <div class="role-info">
-            <img src="Carte_SimpleVillaegois.jpg" class="role-img-thumb" alt="Villageois">
-            <div>
-              <div class="role-name-ar" style="font-size: 18px;">عدد القرويين العاديين</div>
-              <div class="role-name-fr">(Villageois)</div>
-            </div>
-          </div>
-          <div class="counter-group">
-            <button class="counter-btn" onclick="changeCount('villager', -1)">-</button>
-            <span id="villager-count" style="font-weight: bold; width: 15px; text-align: center; font-size: 18px;">3</span>
-            <button class="counter-btn" onclick="changeCount('villager', 1)">+</button>
-          </div>
-        </div>
-      </div>
-
-      <button class="btn-launch" onclick="startGame()">🎲 ابدأ توزيع الأدوار (القرعة)</button>
-
+    <div style="background:rgba(245,158,11,.1);border:1px solid var(--yellow);border-radius:12px;padding:10px 14px;margin-bottom:20px;font-size:14px;color:var(--yellow)">
+      ℹ️ الراوي (Game Master) لا يُحسب ضمن اللاعبين. عدد اللاعبين الحالي: <b id="player-total">0</b>
     </div>
 
-    <!-- كشف الأدوار فردياً -->
-    <div id="game-screen" class="main-wrapper" style="display: none;">
-      <div class="play-card">
-        <h2 id="player-title" style="color: var(--accent-yellow);">اللاعب رقم 1</h2>
-        <div id="role-card" style="display: none;">
-          <img id="role-img-display" class="role-img-large" src="" alt="Role">
-          <h2 id="role-name" style="color: var(--accent-red); margin: 10px 0;">المستذئب</h2>
-          <p id="role-desc" style="color: var(--text-muted); font-size: 15px;">تستيقظ ليلاً مع بقية الذئاب لاختيار الضحية.</p>
-        </div>
-        <button id="action-btn" class="btn-launch" onclick="toggleRole()" style="margin-top: 20px;">اضغط لكشف دورك 👁️</button>
-      </div>
+    <div class="section-box">
+      <div class="section-title wolf">🐺 المستذئبون <small>(Loup-Garou)</small></div>
+      <div class="roles-grid" id="grid-wolf"></div>
+    </div>
+    <div class="section-box">
+      <div class="section-title village">🛡️ أدوار القرية الخاصة <small>(Le Village)</small></div>
+      <div class="roles-grid" id="grid-village"></div>
+    </div>
+    <div class="section-box">
+      <div class="section-title neutral">🎭 الأدوار المحايدة <small>(Neutres)</small></div>
+      <div class="roles-grid" id="grid-neutral"></div>
+    </div>
+    <div class="section-box">
+      <div class="roles-grid" id="grid-villager"></div>
     </div>
 
-    <!-- شاشة الأمان -->
-    <div id="pass-to-gm-screen" class="main-wrapper" style="display: none;">
-      <div class="play-card">
-        <div style="font-size: 70px; margin-bottom: 15px;">🔒</div>
-        <h2 style="color: var(--accent-yellow); margin-top: 0;">تم إكمال كشف جميع الأدوار!</h2>
-        <p style="color: var(--text-muted); font-size: 16px; margin-bottom: 25px;">الرجاء تسليم الهاتف الآن إلى <b>الراوي (Game Master)</b> لبدء اللعبة.</p>
-        <button class="btn-launch" onclick="unlockGMScreen()" style="background: linear-gradient(90deg, #10b981, #059669);">فتح لوحة تحكم الراوي 👑</button>
-      </div>
-    </div>
+    <button class="btn-launch" onclick="startGame()">🎲 ابدأ توزيع الأدوار (القرعة)</button>
 
-    <!-- شاشة الراوي -->
-    <div id="gm-screen" class="main-wrapper" style="display: none;">
-      <div class="section-box">
-        <h2 style="color: var(--accent-red); margin-top: 0; text-align: center;">👑 لوحة تحكم الراوي السريّة</h2>
-        
-        <div style="background: #0f1422; border-radius: 12px; padding: 15px; text-align: center; margin-bottom: 20px; border: 1px solid var(--card-border);">
-          <h3 style="color: var(--accent-yellow); margin: 0;">⏱️ مؤقت النقاش والتصويت (1:30)</h3>
-          <div id="timer-display" class="timer-num">01:30</div>
-          <div style="display: flex; justify-content: center; gap: 10px;">
-            <button class="btn-icon-bg" onclick="startTimer()">بدء 🟢</button>
-            <button class="btn-icon-bg" onclick="pauseTimer()">إيقاف ⏸️</button>
-            <button class="btn-icon-bg" onclick="resetTimer()">إعادة 🔄</button>
-          </div>
-        </div>
-
-        <div style="background: #0f1422; border-radius: 12px; padding: 15px; margin-bottom: 20px; border: 1px solid var(--card-border);">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <h3 style="color: var(--accent-yellow); margin: 0;">🕵️‍♂️ كشف الأدوار للراوي فقط</h3>
-            <button class="btn-icon-bg" onclick="toggleSecretRoles()" id="toggle-secret-btn">إظهار القائمة 👁️</button>
-          </div>
-          <div id="gm-players-list" style="margin-top: 15px; display: none;"></div>
-        </div>
-
-        <h3 style="color: var(--accent-blue); margin-bottom: 12px;">🌙 ترتيب المناداة الليلية (Ordre de Réveil)</h3>
-        <div id="gm-night-calls" style="margin-bottom: 25px;"></div>
-
-        <h3 style="color: var(--accent-yellow); margin-top: 25px;">📋 سجل ملاحظات الليل والنهار</h3>
-        <textarea id="gm-notes" rows="4" style="width: 100%; background: #0f1422; color: #fff; border: 1px solid var(--card-border); border-radius: 10px; padding: 12px; font-size: 14px;" placeholder="سجل الملاحظات هنا..."></textarea>
-
-        <button class="btn-launch" onclick="location.reload()" style="margin-top: 20px;">🔄 بدء لعبة جديدة</button>
-      </div>
-    </div>
-
+    <!-- وحدة إعلانية: استبدل data-ad-slot برقم وحدتك من AdSense -->
+    <ins class="adsbygoogle" style="display:block;margin-top:20px" data-ad-client="ca-pub-1324512454522157" data-ad-slot="0000000000" data-ad-format="auto" data-full-width-responsive="true"></ins>
   </div>
 
-  <script>
-    let counts = { normalWolf: 2, bigWolf: 1, blackWolf: 0, whiteWolf: 0, fatherWolf: 0, chienLoup: 0, villager: 3 };
-    let assignedRoles = [];
-    let currentIdx = 0;
-    let isShowing = false;
-    let timerInterval = null;
-    let timeLeft = 90;
+  <!-- كشف الأدوار -->
+  <div id="game-screen" class="main-wrapper" style="display:none">
+    <div class="play-card">
+      <h2 id="player-title" style="color:var(--yellow)"></h2>
+      <div id="role-card" style="display:none">
+        <img id="role-img-display" class="role-img-large" src="" alt="Role">
+        <h2 id="role-name" style="color:var(--red);margin:10px 0"></h2>
+        <p id="role-desc" style="color:var(--muted);font-size:15px"></p>
+      </div>
+      <button id="action-btn" class="btn-launch" onclick="toggleRole()" style="margin-top:20px"></button>
+    </div>
+  </div>
 
-    function enterApp() {
-      document.getElementById('welcome-screen').style.display = 'none';
-      document.getElementById('app-content').style.display = 'block';
+  <!-- شاشة الأمان -->
+  <div id="pass-to-gm-screen" class="main-wrapper" style="display:none">
+    <div class="play-card">
+      <div style="font-size:70px;margin-bottom:15px">🔒</div>
+      <h2 style="color:var(--yellow);margin-top:0">تم إكمال كشف جميع الأدوار!</h2>
+      <p style="color:var(--muted);font-size:16px;margin-bottom:25px">الرجاء تسليم الهاتف الآن إلى <b>الراوي (Game Master)</b> لبدء اللعبة.</p>
+      <button class="btn-launch" onclick="unlockGMScreen()" style="background:linear-gradient(90deg,#10b981,#059669)">فتح لوحة تحكم الراوي 👑</button>
+    </div>
+  </div>
+
+  <!-- لوحة الراوي -->
+  <div id="gm-screen" class="main-wrapper" style="display:none">
+    <div class="section-box">
+      <h2 style="color:var(--red);margin-top:0;text-align:center">👑 لوحة تحكم الراوي السريّة</h2>
+
+      <div class="gm-box" style="text-align:center">
+        <h3 style="color:var(--yellow);margin:0">⏱️ مؤقت النقاش والتصويت (1:30)</h3>
+        <div id="timer-display" class="timer-num">01:30</div>
+        <div style="display:flex;justify-content:center;gap:10px;flex-wrap:wrap">
+          <button class="btn-icon-bg" onclick="startTimer()">بدء 🟢</button>
+          <button class="btn-icon-bg" onclick="pauseTimer()">إيقاف ⏸️</button>
+          <button class="btn-icon-bg" onclick="resetTimer()">إعادة 🔄</button>
+        </div>
+      </div>
+
+      <div class="gm-box">
+        <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+          <h3 style="color:var(--yellow);margin:0">🕵️‍♂️ كشف الأدوار للراوي فقط</h3>
+          <button class="btn-icon-bg" onclick="toggleSecretRoles()" id="toggle-secret-btn">إظهار القائمة 👁️</button>
+        </div>
+        <div id="gm-players-list" style="margin-top:15px;display:none"></div>
+      </div>
+
+      <div id="gm-extra" class="gm-box" style="display:none"></div>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:12px">
+        <h3 style="color:var(--blue);margin:0">🌙 ترتيب المناداة — الليلة <span id="night-num">1</span></h3>
+        <div style="display:flex;gap:8px">
+          <button class="btn-icon-bg" onclick="changeNight(-1)">السابقة ▶</button>
+          <button class="btn-icon-bg" onclick="changeNight(1)">◀ الليلة التالية</button>
+        </div>
+      </div>
+      <div id="gm-night-calls" style="margin-bottom:25px"></div>
+
+      <h3 style="color:var(--yellow);margin-top:25px">📋 سجل ملاحظات الليل والنهار</h3>
+      <textarea id="gm-notes" rows="4" style="width:100%;background:#0f1422;color:#fff;border:1px solid var(--bd);border-radius:10px;padding:12px;font-size:14px" placeholder="سجل الملاحظات هنا..."></textarea>
+
+      <button class="btn-launch" onclick="resetGame()" style="margin-top:20px">🔄 بدء لعبة جديدة</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ===== تعريف الأدوار ===== */
+const WOLF_IMG = 'Les_Loups_Garous_noir.jpg';
+const ROLES = [
+  // الذئاب (counter)
+  {key:'normalWolf', team:'wolf', ar:'ذئب عادي', fr:'Loup-Garou', img:WOLF_IMG, wolf:true, def:2, name:'ذئب عادي (Loup-Garou)', desc:'تستيقظ ليلاً مع بقية الذئاب لتحديد الضحية.'},
+  {key:'bigWolf', team:'wolf', ar:'الذئب الأكبر', fr:'Grand Méchant', img:'Grand-MeFchant-Loup.jpg', wolf:true, def:1, name:'الذئب الأكبر (Grand Méchant)', desc:'تستيقظ مع الذئاب، ثم تستيقظ وحدك لاختيار ضحية ثانية (ما دام لم يمت أي ذئب).'},
+  {key:'blackWolf', team:'wolf', ar:'الذئب الأسود', fr:'Loup Noir', img:WOLF_IMG, wolf:true, def:0, name:'الذئب الأسود (Loup Noir)', desc:'ذئب يستيقظ مع القطيع وله قدرة خاصة يحددها الراوي حسب قواعدكم (مثلاً: تحويل ضحية إلى ذئب).'},
+  {key:'whiteWolf', team:'wolf', ar:'الذئب الأبيض', fr:'Loup Blanc', img:'Loup Blanc.jpg', wolf:true, def:0, name:'الذئب الأبيض (Loup Blanc)', desc:'تستيقظ مع الذئاب، وكل ليلتين تستيقظ وحدك لقتل ذئب آخر. هدفك الفوز وحدك.'},
+  {key:'fatherWolf', team:'wolf', ar:'أب الذئاب', fr:'Père des Loups', img:'Père des Loups.jpg', wolf:true, def:0, name:'أب الذئاب (Père des Loups)', desc:'تستطيع مرة واحدة في اللعبة تحويل ضحية الذئاب إلى ذئب بدلاً من قتلها.'},
+  {key:'chienLoup', team:'wolf', ar:'الكلب-الذئب', fr:'Chien-Loup', img:'Chien-Loup.jpg', wolf:false, def:0, name:'الكلب-الذئب (Chien-Loup)', desc:'تختار في الليلة الأولى هل تكون قروياً أم من صف الذئاب.'},
+  // القرية (checkbox)
+  {key:'captain', team:'village', ar:'القائد / العمدة', fr:'Le Capitaine', img:'Capitaine.jpg', noCard:true},
+  {key:'voyante', team:'village', ar:'العرافة', fr:'Voyante', img:'Voyante.jpg', on:true, name:'العرافة (Voyante)', desc:'تكشف دور لاعب واحد كل ليلة.'},
+  {key:'sorciere', team:'village', ar:'الساحرة', fr:'Sorcière', img:'Sorcière.jpg', on:true, name:'الساحرة (Sorcière)', desc:'تمتلك جرعة شفاء وجرعة سم، تستعمل كلاً منهما مرة واحدة.'},
+  {key:'chasseur', team:'village', ar:'الصياد', fr:'Chasseur', img:'Chasseur.jpg', on:true, name:'الصياد (Chasseur)', desc:'إذا مت تطلق النار على شخص ليموت معك.'},
+  {key:'petiteFille', team:'village', ar:'الفتاة الصغيرة', fr:'Petite Fille', img:'الفتاة الصغيرة.jpg', on:true, name:'الفتاة الصغيرة (Petite Fille)', desc:'تسترق النظر خلسة عند استيقاظ الذئاب ليلاً.'},
+  {key:'renard', team:'village', ar:'الثعلب', fr:'Renard', img:'Renard.jpg', name:'الثعلب (Renard)', desc:'تفحص مجموعة من 3 لاعبين متجاورين: إن كان بينهم ذئب تحتفظ بقدرتك، وإلا تفقدها.'},
+  {key:'corbeau', team:'village', ar:'الغراب', fr:'Corbeau', img:'Corbeau.jpg', name:'الغراب (Corbeau)', desc:'تختار ليلاً لاعباً يبدأ التصويت ضده بصوتين إضافيين.'},
+  {key:'salvateur', team:'village', ar:'الحامي', fr:'Salvateur', img:'Salvateur.jpg', name:'الحامي (Salvateur)', desc:'تحمي لاعباً من هجوم الذئاب كل ليلة (دون تكرار نفس اللاعب ليلتين متتاليتين).'},
+  {key:'ancien', team:'village', ar:'العجوز / العميد', fr:"L'Ancien", img:'Ancien (1).jpg', name:"العجوز / العميد (L'Ancien)", desc:'تنجو من أول هجمة للذئاب.'},
+  {key:'bouc', team:'village', ar:'كبش الفداء', fr:'Bouc Émissaire', img:'كبش الفداء.jpg', name:'كبش الفداء (Bouc Émissaire)', desc:'تموت تلقائياً عند تعادل الأصوات في التصويت.'},
+  {key:'idiot', team:'village', ar:'أحمق القرية', fr:'Idiot du Village', img:'Idiot du village.jpg', name:'أحمق القرية (Idiot du Village)', desc:'تنجو من الإعدام أول مرة لكنك تفقد حق التصويت.'},
+  {key:'soeurs', team:'village', ar:'الأختان', fr:'Deux Sœurs', img:'Deux Sœurs.jpg', copies:2, name:'الأختان (Deux Sœurs)', desc:'أنتِ إحدى الأختين. تستيقظان في الليلة الأولى لتتعارفا.'},
+  {key:'chevalier', team:'village', ar:'الفارس بسيف صدئ', fr:"Chevalier à l'Épée", img:"Chevalier à l'Épée Rouillée.jpg", name:'الفارس بسيف صدئ (Chevalier)', desc:'إذا قتلك الذئاب، يموت أحد الذئاب في اليوم التالي.'},
+  {key:'bear', team:'village', ar:'مروّض الدب', fr:"L'Ours", img:'Ours.jpg', name:"مروّض الدب (L'Ours)", desc:'إذا كان أحد جارَيك المباشرين مستذئباً، يزمجر الدب في الصباح.'},
+  {key:'cupid', team:'village', ar:'كيوبيد', fr:'Cupidon', img:'Cupidon.jpg', name:'كيوبيد (Cupidon)', desc:'في الليلة الأولى تختار لاعبين يرتبط مصيرهما بالحب: إن مات أحدهما مات الآخر.'},
+  {key:'thief', team:'village', ar:'اللص', fr:'Le Voleur', img:'Voleur.jpg', name:'اللص (Le Voleur)', desc:'في الليلة الأولى يعرض عليك الراوي بطاقتين إضافيتين، يمكنك استبدال دورك بإحداهما.'},
+  // محايد
+  {key:'ange', team:'neutral', ar:'الملاك', fr:"L'Ange", img:'Ange.jpg', name:"الملاك (L'Ange)", desc:'هدفك أن تموت في الجولة الأولى (بالإعدام أو بالذئاب) لتفوز فوراً.'},
+  // قرويون
+  {key:'villager', team:'villager', ar:'عدد القرويين العاديين', fr:'Villageois', img:'Carte_SimpleVillaegois.jpg', counter:true, def:3, name:'قروي عادي (Villageois)', desc:'ليس لديك قدرة ليلاً، تصوّت نهاراً فقط.'}
+];
+const byKey = Object.fromEntries(ROLES.map(r => [r.key, r]));
+const isCounter = r => r.team === 'wolf' || r.counter;
+
+/* ===== ترتيب المناداة ليلاً ===== */
+const WOLF_KEYS = ['normalWolf','bigWolf','blackWolf','whiteWolf','fatherWolf'];
+const NIGHT_STEPS = [
+  {keys:['thief'], title:'اللص (Le Voleur)', text:'يستيقظ ليلة البداية ويعرض عليه الراوي البطاقتين الإضافيتين ليبدّل دوره إن أراد.', first:true},
+  {keys:['cupid'], title:'كيوبيد (Cupidon)', text:'يستيقظ ليلة البداية لاختيار الحبيبين (ثم يستيقظ الحبيبان للتعارف).', first:true},
+  {keys:['chienLoup'], title:'الكلب-الذئب (Chien-Loup)', text:'يستيقظ ليلة البداية ليقرر صفه.', first:true},
+  {keys:['soeurs'], title:'الأختان (Deux Sœurs)', text:'تستيقظان في الليلة الأولى فقط للتعارف.', first:true},
+  {keys:['salvateur'], title:'الحامي (Salvateur)', text:'يستيقظ ليختار لاعباً لحمايته من الذئاب.'},
+  {keys:['renard'], title:'الثعلب (Renard)', text:'يستيقظ لفحص مجموعة من 3 لاعبين متجاورين.'},
+  {keys:['voyante'], title:'العرافة (Voyante)', text:'تستيقظ لتكشف بطاقة أحد اللاعبين.'},
+  {keys:WOLF_KEYS, title:'فريق المستذئبين (Les Loups)', text:'يستيقظ الذئاب لاختيار الضحية (وتسترق الفتاة الصغيرة النظر). الذئب الأسود يستعمل قدرته إن وُجدت.'},
+  {keys:['fatherWolf'], title:'أب الذئاب (Père des Loups)', text:'اسأله إن كان يريد تحويل الضحية إلى ذئب (مرة واحدة فقط في اللعبة).'},
+  {keys:['bigWolf'], title:'الذئب الأكبر (Grand Méchant)', text:'يستيقظ لاختيار ضحية إضافية (ما دام لم يمت أي ذئب).'},
+  {keys:['whiteWolf'], title:'الذئب الأبيض (Loup Blanc)', text:'يستيقظ في الليالي الزوجية فقط (2، 4، 6...) لقتل ذئب آخر.', even:true},
+  {keys:['sorciere'], title:'الساحرة (Sorcière)', text:'تستيقظ لرؤية الضحية واستخدام جرعة الشفاء أو السم.'},
+  {keys:['corbeau'], title:'الغراب (Corbeau)', text:'يستيقظ للإشارة إلى لاعب يوضع عليه صوتان غداً.'},
+  {keys:['bear'], title:"مروّض الدب (L'Ours)", text:'في الصباح: يزمجر الدب إن كان أحد جارَي المروّض ذئباً.', morning:true}
+];
+
+/* ===== الحالة ===== */
+let counts = {};
+let assignedRoles = [];
+let centerCards = [];
+let captainOn = false;
+let currentIdx = 0, isShowing = false;
+let timerInterval = null, timeLeft = 90;
+let nightNum = 1;
+let toastTimer = null;
+
+const $ = id => document.getElementById(id);
+
+function toast(msg){
+  const t = $('toast');
+  t.innerText = msg; t.style.display = 'block';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.style.display = 'none', 3500);
+}
+
+/* ===== بناء شاشة الإعدادات ===== */
+function roleInfoHTML(r, big){
+  return `<div class="role-info"><img src="${r.img}" class="role-img-thumb" alt="${r.fr}">
+    <div><div class="role-name-ar" ${big?'style="font-size:18px"':''}>${r.ar}</div><div class="role-name-fr">(${r.fr})</div></div></div>`;
+}
+function buildSetup(){
+  ROLES.forEach(r => {
+    const grid = $('grid-' + r.team);
+    const item = document.createElement('div');
+    item.className = 'role-card-item';
+    if (isCounter(r)) {
+      counts[r.key] = r.def;
+      item.innerHTML = roleInfoHTML(r, r.team === 'villager') + `
+        <div class="counter-group">
+          <button class="counter-btn" onclick="changeCount('${r.key}',-1)" aria-label="إنقاص">-</button>
+          <span class="count-num" id="${r.key}-count">${r.def}</span>
+          <button class="counter-btn" onclick="changeCount('${r.key}',1)" aria-label="زيادة">+</button>
+        </div>`;
+    } else {
+      item.innerHTML = roleInfoHTML(r) + `<input type="checkbox" class="checkbox-custom" id="${r.key}" ${r.on?'checked':''} onchange="updateTotal()" aria-label="${r.ar}">`;
     }
+    grid.appendChild(item);
+  });
+  $('guide-box').innerHTML = '<h3 style="color:var(--yellow);margin-top:0">📖 شرح الأدوار والقواعد</h3>' +
+    ROLES.filter(r => r.desc || r.key === 'captain').map(r =>
+      `<p>• <b>${r.ar}:</b> ${r.key === 'captain' ? 'منصب يُنتخب من بين اللاعبين في اليوم الأول (لا يأخذ بطاقة). صوته يحتسب بصوتين، وعند موته يختار خليفته.' : r.desc}</p>`
+    ).join('');
+  updateTotal();
+}
 
-    function toggleGuide() {
-      const g = document.getElementById('guide-box');
-      g.style.display = (g.style.display === 'none') ? 'block' : 'none';
+function calcTotal(){
+  let n = 0;
+  ROLES.forEach(r => {
+    if (r.noCard) return;
+    if (isCounter(r)) n += counts[r.key];
+    else if ($(r.key).checked) n += (r.copies || 1);
+  });
+  return n;
+}
+function updateTotal(){ $('player-total').innerText = calcTotal(); }
+
+function enterApp(){
+  $('welcome-screen').style.display = 'none';
+  $('app-content').style.display = 'block';
+  try { (window.adsbygoogle = window.adsbygoogle || []).push({}); } catch(e){}
+}
+function toggleGuide(){
+  const g = $('guide-box');
+  g.style.display = g.style.display === 'none' ? 'block' : 'none';
+}
+function changeCount(type, val){
+  if (counts[type] + val >= 0) {
+    counts[type] += val;
+    $(`${type}-count`).innerText = counts[type];
+    updateTotal();
+  }
+}
+
+/* ===== بدء اللعبة ===== */
+function shuffle(a){
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function startGame(){
+  assignedRoles = [];
+  centerCards = [];
+  captainOn = $('captain').checked;
+
+  ROLES.forEach(r => {
+    if (r.noCard) return;
+    const n = isCounter(r) ? counts[r.key] : ($(r.key).checked ? (r.copies || 1) : 0);
+    for (let i = 0; i < n; i++)
+      assignedRoles.push({name:r.name, img:r.img, key:r.key, desc:r.desc, alive:true});
+  });
+
+  const total = assignedRoles.length;
+  const wolves = assignedRoles.filter(p => byKey[p.key].wolf).length;
+  if (total < 4) return toast('أقل عدد للاعبين هو 4. أضف المزيد من الأدوار.');
+  if (wolves < 1 && !assignedRoles.some(p => p.key === 'chienLoup')) return toast('يجب وجود ذئب واحد على الأقل.');
+  if (wolves >= total - wolves) return toast('عدد الذئاب كبير جداً: يجب أن يكون أقل من نصف اللاعبين.');
+
+  // اللص: بطاقتان إضافيتان خارج توزيع اللاعبين
+  if (assignedRoles.some(p => p.key === 'thief')) {
+    const v = byKey.villager;
+    for (let i = 0; i < 2; i++)
+      centerCards.push({name:v.name, img:v.img, key:'villager', desc:v.desc});
+  }
+
+  shuffle(assignedRoles);
+  currentIdx = 0; nightNum = 1;
+  $('setup-screen').style.display = 'none';
+  $('game-screen').style.display = 'block';
+  updatePlayerUI();
+}
+
+function updatePlayerUI(){
+  $('player-title').innerText = `مرر الهاتف للاعب رقم ${currentIdx + 1}`;
+  $('role-card').style.display = 'none';
+  $('role-img-display').src = '';
+  $('role-name').innerText = '';
+  $('role-desc').innerText = '';
+  $('action-btn').innerText = 'اضغط لكشف دورك 👁️';
+  isShowing = false;
+}
+
+function toggleRole(){
+  if (!isShowing) {
+    const role = assignedRoles[currentIdx];
+    $('role-img-display').src = role.img;
+    $('role-name').innerText = role.name;
+    $('role-desc').innerText = role.desc;
+    $('role-card').style.display = 'block';
+    $('action-btn').innerText = 'إخفاء وتمرير الهاتف للاعب التالي 📲';
+    isShowing = true;
+  } else {
+    currentIdx++;
+    if (currentIdx < assignedRoles.length) updatePlayerUI();
+    else {
+      $('role-card').style.display = 'none';
+      $('role-img-display').src = '';
+      $('game-screen').style.display = 'none';
+      $('pass-to-gm-screen').style.display = 'block';
     }
+  }
+}
 
-    function changeCount(type, val) {
-      if (counts[type] + val >= 0) {
-        counts[type] += val;
-        document.getElementById(`${type}-count`).innerText = counts[type];
+/* ===== لوحة الراوي ===== */
+function unlockGMScreen(){
+  $('pass-to-gm-screen').style.display = 'none';
+  $('gm-screen').style.display = 'block';
+  renderGMExtra();
+  renderGMNightCalls();
+  renderGMPlayersList();
+}
+
+function renderGMExtra(){
+  const box = $('gm-extra');
+  let html = '';
+  if (captainOn)
+    html += '<p style="margin:0 0 8px">👑 <b>القائد:</b> في صباح اليوم الأول اجعل اللاعبين ينتخبون قائداً من بينهم (صوته بصوتين).</p>';
+  if (centerCards.length)
+    html += `<p style="margin:0">🃏 <b>بطاقتا اللص الإضافيتان:</b> ${centerCards.map(c => c.name).join(' + ')}</p>`;
+  box.innerHTML = html;
+  box.style.display = html ? 'block' : 'none';
+}
+
+function toggleSecretRoles(){
+  const d = $('gm-players-list'), b = $('toggle-secret-btn');
+  const hidden = d.style.display === 'none';
+  d.style.display = hidden ? 'block' : 'none';
+  b.innerText = hidden ? 'إخفاء القائمة 🙈' : 'إظهار القائمة 👁️';
+}
+
+function renderGMPlayersList(){
+  const c = $('gm-players-list');
+  c.innerHTML = '';
+  assignedRoles.forEach((p, i) => {
+    const row = document.createElement('div');
+    row.className = `player-row ${p.alive ? '' : 'dead'}`;
+    row.id = `player-row-${i}`;
+    row.innerHTML = `
+      <div style="display:flex;align-items:center;gap:10px">
+        <img src="${p.img}" class="role-img-thumb" alt="role" style="width:32px;height:32px">
+        <span class="p-name" style="font-weight:bold">اللاعب ${i + 1} : ${p.name}</span>
+      </div>
+      <button class="status-btn ${p.alive ? 'btn-kill' : 'btn-revive'}" onclick="togglePlayerStatus(${i})">${p.alive ? 'قتل 💀' : 'إحياء 🟢'}</button>`;
+    c.appendChild(row);
+  });
+}
+
+function togglePlayerStatus(i){
+  assignedRoles[i].alive = !assignedRoles[i].alive;
+  const row = $(`player-row-${i}`), a = assignedRoles[i].alive;
+  row.className = `player-row ${a ? '' : 'dead'}`;
+  const b = row.querySelector('.status-btn');
+  b.className = `status-btn ${a ? 'btn-kill' : 'btn-revive'}`;
+  b.innerText = a ? 'قتل 💀' : 'إحياء 🟢';
+  renderGMNightCalls();
+}
+
+function changeNight(d){
+  nightNum = Math.max(1, nightNum + d);
+  renderGMNightCalls();
+}
+
+function renderGMNightCalls(){
+  $('night-num').innerText = nightNum;
+  const box = $('gm-night-calls');
+  // الأدوار الحيّة فقط
+  const alive = assignedRoles.filter(p => p.alive).map(p => p.key);
+  const steps = NIGHT_STEPS.filter(s =>
+    s.keys.some(k => alive.includes(k)) &&
+    (!s.first || nightNum === 1) &&
+    (!s.even || nightNum % 2 === 0)
+  );
+  box.innerHTML = '';
+  if (!steps.length) {
+    box.innerHTML = '<div style="color:var(--muted);font-size:14px">لا توجد أدوار تستيقظ في هذه الليلة.</div>';
+    return;
+  }
+  steps.forEach((s, i) => {
+    const d = document.createElement('div');
+    d.className = 'call-step';
+    d.innerHTML = `<div class="call-num">${i + 1}</div><div>
+      <div style="font-weight:bold">${s.title}</div>
+      <div style="font-size:13px;color:var(--muted)">${s.text}</div></div>`;
+    box.appendChild(d);
+  });
+}
+
+/* ===== المؤقت ===== */
+function startTimer(){
+  if (timerInterval) return;
+  if (timeLeft <= 0) { timeLeft = 90; updateTimerDisplay(); }
+  timerInterval = setInterval(() => {
+    if (timeLeft > 0) {
+      timeLeft--; updateTimerDisplay();
+      if (timeLeft === 0) {
+        clearInterval(timerInterval); timerInterval = null;
+        toast('⏰ انتهى وقت النقاش والتصويت!');
+        if (navigator.vibrate) navigator.vibrate([300, 150, 300]);
       }
     }
+  }, 1000);
+}
+function pauseTimer(){ clearInterval(timerInterval); timerInterval = null; }
+function resetTimer(){ pauseTimer(); timeLeft = 90; updateTimerDisplay(); }
+function updateTimerDisplay(){
+  const m = String(Math.floor(timeLeft / 60)).padStart(2, '0');
+  const s = String(timeLeft % 60).padStart(2, '0');
+  $('timer-display').innerText = `${m}:${s}`;
+}
 
-    function startGame() {
-      assignedRoles = [];
-      
-      const imgMap = {
-        wolf: 'Les_Loups_Garous_noir.jpg',
-        bigWolf: 'Grand-MeFchant-Loup.jpg',
-        blackWolf: 'Les_Loups_Garous_noir.jpg',
-        whiteWolf: 'Loup Blanc.jpg',
-        fatherWolf: 'Père des Loups.jpg',
-        chienLoup: 'Chien-Loup.jpg',
-        captain: 'Capitaine.jpg',
-        voyante: 'Voyante.jpg',
-        sorciere: 'Sorcière.jpg',
-        chasseur: 'Chasseur.jpg',
-        petiteFille: 'الفتاة الصغيرة.jpg',
-        renard: 'Renard.jpg',
-        corbeau: 'Corbeau.jpg',
-        salvateur: 'Salvateur.jpg',
-        ancien: 'Ancien (1).jpg',
-        bouc: 'كبش الفداء.jpg',
-        idiot: 'Idiot du village.jpg',
-        soeurs: 'Deux Sœurs.jpg',
-        chevalier: 'Chevalier à l\'Épée Rouillée.jpg',
-        bear: 'Ours.jpg',
-        cupid: 'Cupidon.jpg',
-        thief: 'Voleur.jpg',
-        ange: 'Ange.jpg',
-        villager: 'Carte_SimpleVillaegois.jpg'
-      };
+/* ===== إعادة اللعبة (بدون إعادة تحميل الصفحة) ===== */
+function resetGame(){
+  resetTimer();
+  assignedRoles = []; centerCards = [];
+  currentIdx = 0; isShowing = false; nightNum = 1;
+  ['game-screen','pass-to-gm-screen','gm-screen'].forEach(id => $(id).style.display = 'none');
+  $('setup-screen').style.display = 'block';
+  $('role-img-display').src = '';
+  $('gm-notes').value = '';
+  $('gm-players-list').style.display = 'none';
+  $('toggle-secret-btn').innerText = 'إظهار القائمة 👁️';
+  window.scrollTo(0, 0);
+}
 
-      for(let i=0; i<counts.normalWolf; i++) assignedRoles.push({ name: 'ذئب عادي (Loup-Garou)', img: imgMap.wolf, key: 'wolf', desc: 'تستيقظ ليلاً مع بقية الذئاب لتحديد الضحية.', alive: true });
-      for(let i=0; i<counts.bigWolf; i++) assignedRoles.push({ name: 'الذئب الأكبر (Grand Méchant)', img: imgMap.bigWolf, key: 'bigWolf', desc: 'تستيقظ مع الذئاب، ثم تستيقظ وحدك لاختيار ضحية ثانية!', alive: true });
-      for(let i=0; i<counts.blackWolf; i++) assignedRoles.push({ name: 'الذئب الأسود (Loup Noir)', img: imgMap.blackWolf, key: 'blackWolf', desc: 'ذئب بقدرة خاصة تزيد قوة القطيع.', alive: true });
-      for(let i=0; i<counts.whiteWolf; i++) assignedRoles.push({ name: 'الذئب الأبيض (Loup Blanc)', img: imgMap.whiteWolf, key: 'whiteWolf', desc: 'تستيقظ كل ليلتين لقتل ذئب آخر والفوز وحدك.', alive: true });
-      for(let i=0; i<counts.fatherWolf; i++) assignedRoles.push({ name: 'أب الذئاب (Père des Loups)', img: imgMap.fatherWolf, key: 'fatherWolf', desc: 'تستطيع تحويل ضحية إلى ذئب بدلاً من قتلها مرة واحدة باللعبة.', alive: true });
-      for(let i=0; i<counts.chienLoup; i++) assignedRoles.push({ name: 'الكلب-الذئب (Chien-Loup)', img: imgMap.chienLoup, key: 'chienLoup', desc: 'يختار في بداية اللعبة ما إذا كان قروياً أو من صف الذئاب.', alive: true });
-
-      if(document.getElementById('captain') && document.getElementById('captain').checked) assignedRoles.push({ name: 'القائد / العمدة (Le Capitaine)', img: imgMap.captain, key: 'captain', desc: 'صوتك يحتسب بصوتين أثناء التصويت النهاري، وفي حال موتك تختار من يخلفك.', alive: true });
-      if(document.getElementById('voyante').checked) assignedRoles.push({ name: 'العرافة (Voyante)', img: imgMap.voyante, key: 'voyante', desc: 'تكشف دور لاعب واحد كل ليلة.', alive: true });
-      if(document.getElementById('sorciere').checked) assignedRoles.push({ name: 'الساحرة (Sorcière)', img: imgMap.sorciere, key: 'sorciere', desc: 'تمتلك جرعة شفاعة وجرعة سم.', alive: true });
-      if(document.getElementById('chasseur').checked) assignedRoles.push({ name: 'الصياد (Chasseur)', img: imgMap.chasseur, key: 'chasseur', desc: 'إذا مت تطلق النار على شخص ليأخذ معك.', alive: true });
-      if(document.getElementById('petiteFille').checked) assignedRoles.push({ name: 'الفتاة الصغيرة (Petite Fille)', img: imgMap.petiteFille, key: 'petiteFille', desc: 'تسترق النظر خلسة عند استيقاظ الذئاب ليلاً.', alive: true });
-      if(document.getElementById('renard').checked) assignedRoles.push({ name: 'الثعلب (Renard)', img: imgMap.renard, key: 'renard', desc: 'تكشف ما إذا كان بين 3 لاعبين مجاورين ذئب.', alive: true });
-      if(document.getElementById('corbeau').checked) assignedRoles.push({ name: 'الغراب (Corbeau)', img: imgMap.corbeau, key: 'corbeau', desc: 'تضع صوتين إضافيين على شخص ليلاً.', alive: true });
-      if(document.getElementById('salvateur').checked) assignedRoles.push({ name: 'الحامي (Salvateur)', img: imgMap.salvateur, key: 'salvateur', desc: 'تحمي لاعباً من الهجمات كل ليلة.', alive: true });
-      if(document.getElementById('ancien').checked) assignedRoles.push({ name: 'العجوز / العميد (L\'Ancien)', img: imgMap.ancien, key: 'ancien', desc: 'تتحمل هجمة الذئاب الأولى.', alive: true });
-      if(document.getElementById('bouc').checked) assignedRoles.push({ name: 'كبش الفداء (Bouc Émissaire)', img: imgMap.bouc, key: 'bouc', desc: 'تموت تلقائياً عند التعادل لتفادي إعادة التصويت.', alive: true });
-      if(document.getElementById('idiot').checked) assignedRoles.push({ name: 'أحمق القرية (Idiot du Village)', img: imgMap.idiot, key: 'idiot', desc: 'تنجو من الإعدام لأول مرة وتفقد حق التصويت.', alive: true });
-      if(document.getElementById('soeurs').checked) assignedRoles.push({ name: 'الأختان (Deux Sœurs)', img: imgMap.soeurs, key: 'soeurs', desc: 'تستيقظان في الليلة الأولى للتعارف.', alive: true });
-      if(document.getElementById('chevalier').checked) assignedRoles.push({ name: 'الفارس بسيف صدئ (Chevalier)', img: imgMap.chevalier, key: 'chevalier', desc: 'الذئب الذي يأكلك يموت بعد يومين.', alive: true });
-
-      if(document.getElementById('bear').checked) assignedRoles.push({ name: 'مروّض الدب (L\'Ours)', img: imgMap.bear, key: 'bear', desc: 'إذا كان أحد جيرانك المباشرين مستذئباً، ينعر الدب في الصباح.', alive: true });
-      if(document.getElementById('cupid').checked) assignedRoles.push({ name: 'كيوبيد (Cupidon)', img: imgMap.cupid, key: 'cupid', desc: 'يختار لاعبين اثنين ليربط مصيريهما بالحب ليلاً.', alive: true });
-      if(document.getElementById('thief').checked) assignedRoles.push({ name: 'اللص (Le Voleur)', img: imgMap.thief, key: 'thief', desc: 'يبدل دوره في الليلة الأولى مع إحدى البطاقات الإضافية.', alive: true });
-
-      if(document.getElementById('ange').checked) assignedRoles.push({ name: 'الملاك (L\'Ange)', img: imgMap.ange, key: 'ange', desc: 'هدفك أن يتم إعدامك في اليوم الأول لتفوز فوراً!', alive: true });
-
-      for(let i=0; i<counts.villager; i++) assignedRoles.push({ name: 'قروي عادي (Villageois)', img: imgMap.villager, key: 'villager', desc: 'ليس لديك قدرة ليلاً، تصوّت نهاراً فقط.', alive: true });
-
-      if (assignedRoles.length === 0) {
-        alert('الرجاء اختيار أدوار أولاً!');
-        return;
-      }
-
-      assignedRoles.sort(() => Math.random() - 0.5);
-
-      currentIdx = 0;
-      document.getElementById('setup-screen').style.display = 'none';
-      document.getElementById('game-screen').style.display = 'block';
-      updatePlayerUI();
-    }
-
-    function updatePlayerUI() {
-      document.getElementById('player-title').innerText = `مرر الهاتف للاعب رقم ${currentIdx + 1}`;
-      document.getElementById('role-card').style.display = 'none';
-      document.getElementById('action-btn').innerText = 'اضغط لكشف دورك 👁️';
-      isShowing = false;
-    }
-
-    function toggleRole() {
-      const card = document.getElementById('role-card');
-      const btn = document.getElementById('action-btn');
-
-      if (!isShowing) {
-        const role = assignedRoles[currentIdx];
-        document.getElementById('role-img-display').src = role.img;
-        document.getElementById('role-name').innerText = role.name;
-        document.getElementById('role-desc').innerText = role.desc;
-        
-        card.style.display = 'block';
-        btn.innerText = 'إخفاء وتمرير الهاتف للاعب التالي 📲';
-        isShowing = true;
-      } else {
-        currentIdx++;
-        if (currentIdx < assignedRoles.length) {
-          updatePlayerUI();
-        } else {
-          document.getElementById('game-screen').style.display = 'none';
-          document.getElementById('pass-to-gm-screen').style.display = 'block';
-        }
-      }
-    }
-
-    function unlockGMScreen() {
-      document.getElementById('pass-to-gm-screen').style.display = 'none';
-      document.getElementById('gm-screen').style.display = 'block';
-      renderGMNightCalls();
-      renderGMPlayersList();
-    }
-
-    function toggleSecretRoles() {
-      const listDiv = document.getElementById('gm-players-list');
-      const btn = document.getElementById('toggle-secret-btn');
-      if (listDiv.style.display === 'none') {
-        listDiv.style.display = 'block';
-        btn.innerText = 'إخفاء القائمة 🙈';
-      } else {
-        listDiv.style.display = 'none';
-        btn.innerText = 'إظهار القائمة 👁️';
-      }
-    }
-
-    function renderGMPlayersList() {
-      const container = document.getElementById('gm-players-list');
-      container.innerHTML = '';
-      assignedRoles.forEach((player, index) => {
-        const row = document.createElement('div');
-        row.className = `player-row ${player.alive ? '' : 'dead'}`;
-        row.id = `player-row-${index}`;
-        row.innerHTML = `
-          <div style="display: flex; align-items: center; gap: 10px;">
-            <img src="${player.img}" class="role-img-thumb" alt="role" style="width: 32px; height: 32px;">
-            <span class="p-name" style="font-weight: bold;">اللاعب ${index + 1} : ${player.name}</span>
-          </div>
-          <button class="status-btn ${player.alive ? 'btn-kill' : 'btn-revive'}" onclick="togglePlayerStatus(${index})">
-            ${player.alive ? 'قتل 💀' : 'إحياء 🟢'}
-          </button>
-        `;
-        container.appendChild(row);
-      });
-    }
-
-    function togglePlayerStatus(index) {
-      assignedRoles[index].alive = !assignedRoles[index].alive;
-      const row = document.getElementById(`player-row-${index}`);
-      row.className = `player-row ${assignedRoles[index].alive ? '' : 'dead'}`;
-      const btn = row.querySelector('.status-btn');
-      btn.className = `status-btn ${assignedRoles[index].alive ? 'btn-kill' : 'btn-revive'}`;
-      btn.innerText = assignedRoles[index].alive ? 'قتل 💀' : 'إحياء 🟢';
-    }
-
-    function renderGMNightCalls() {
-      const callsContainer = document.getElementById('gm-night-calls');
-      
-      // الترتيب الصحيح والمنظم للاستيقاظ ليلاً
-      const allPossibleSteps = [
-        { key: 'thief', title: 'اللص (Le Voleur)', text: 'يستيقظ ليلة البداية لتبديل دوره إن أراد.' },
-        { key: 'cupid', title: 'كيوبيد (Cupidon)', text: 'يستيقظ ليلة البداية لاختيار الحبيبين.' },
-        { key: 'chienLoup', title: 'الكلب-الذئب (Chien-Loup)', text: 'يستيقظ ليلة البداية ليقرر صفه.' },
-        { key: 'soeurs', title: 'الأختان (Deux Sœurs)', text: 'تستيقظان في الليلة الأولى فقط للتعارف.' },
-        { key: 'salvateur', title: 'الحامي (Salvateur)', text: 'يستيقظ ليختار لاعباً لحمايته من الذئاب.' },
-        { key: 'renard', title: 'الثعلب (Renard)', text: 'يستيقظ لفحص مجموعة من 3 لاعبين مجاورين.' },
-        { key: 'voyante', title: 'العرافة (Voyante)', text: 'تستيقظ لتكشف بطاقة أحد اللاعبين.' },
-        { key: 'wolf', title: 'فريق المستذئبين (Les Loups)', text: 'يستيقظ الذئاب لاختيار الضحية (وتسترق الفتاة الصغيرة النظر).' },
-        { key: 'bigWolf', title: 'الذئب الأكبر (Grand Méchant)', text: 'يستيقظ لاختيار ضحية إضافية.' },
-        { key: 'whiteWolf', title: 'الذئب الأبيض (Loup Blanc)', text: 'يستيقظ كل ليلتين لاصطياد ذئب آخر.' },
-        { key: 'bear', title: 'مروّض الدب (L\'Ours)', text: 'يصدر صوتاً في الصباح إن كان أحد جيرانه ذئباً.' },
-        { key: 'sorciere', title: 'الساحرة (Sorcière)', text: 'تستيقظ لرؤية الضحية واستخدام الشفاء أو السم.' },
-        { key: 'corbeau', title: 'الغراب (Corbeau)', text: 'يستيقظ للإشارة إلى لاعب يوضع عليه صوتان غداً.' }
-      ];
-
-      // فلترة الخطوات بناءً على الأدوار الموجودة فعلياً في اللعبة
-      const activeKeys = assignedRoles.map(r => r.key);
-      const activeSteps = allPossibleSteps.filter(step => {
-        if (step.key === 'wolf') {
-          return activeKeys.includes('wolf') || activeKeys.includes('bigWolf') || activeKeys.includes('blackWolf') || activeKeys.includes('fatherWolf');
-        }
-        return activeKeys.includes(step.key);
-      });
-
-      callsContainer.innerHTML = '';
-      if (activeSteps.length === 0) {
-        callsContainer.innerHTML = '<div style="color: var(--text-muted); font-size: 14px;">لا توجد أدوار ليلية مفعلة في هذه الجولة.</div>';
-        return;
-      }
-
-      activeSteps.forEach((step, idx) => {
-        const div = document.createElement('div');
-        div.className = 'call-step';
-        div.innerHTML = `
-          <div class="call-num">${idx + 1}</div>
-          <div>
-            <div style="font-weight: bold; color: var(--text-main);">${step.title}</div>
-            <div style="font-size: 13px; color: var(--text-muted);">${step.text}</div>
-          </div>
-        `;
-        callsContainer.appendChild(div);
-      });
-    }
-
-    function startTimer() {
-      if (timerInterval) return;
-      timerInterval = setInterval(() => {
-        if (timeLeft > 0) {
-          timeLeft--;
-          updateTimerDisplay();
-        } else {
-          clearInterval(timerInterval);
-          timerInterval = null;
-          alert('انتهى وقت النقاش والتصويت!');
-        }
-      }, 1000);
-    }
-
-    function pauseTimer() {
-      clearInterval(timerInterval);
-      timerInterval = null;
-    }
-
-    function resetTimer() {
-      pauseTimer();
-      timeLeft = 90;
-      updateTimerDisplay();
-    }
-
-    function updateTimerDisplay() {
-      const mins = Math.floor(timeLeft / 60).toString().padStart(2, '0');
-      const secs = (timeLeft % 60).toString().padStart(2, '0');
-      document.getElementById('timer-display').innerText = `${mins}:${secs}`;
-    }
-  </script>
+buildSetup();
+</script>
 </body>
 </html>
