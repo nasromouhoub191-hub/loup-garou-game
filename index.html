@@ -6,47 +6,85 @@
 <title>تطبيق المستذئبين - MADE BY NASRO MHB</title>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1324512454522157" crossorigin="anonymous"></script>
 <link rel="manifest" href="manifest.json">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0b0e17;--card:#121829;--bd:#1e293b;--red:#f43f5e;--purple:#a855f7;--yellow:#f59e0b;--blue:#0284c7;--text:#f8fafc;--muted:#94a3b8}
-*{box-sizing:border-box;font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif}
-body{background:var(--bg);color:var(--text);margin:0;direction:rtl}
-#welcome-screen{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;background:radial-gradient(circle at center,#1e1b4b 0%,#0b0e17 100%);padding:20px;text-align:center}
-.sponsor-badge{background:rgba(244,63,94,.15);border:1px solid var(--red);color:var(--yellow);padding:8px 18px;border-radius:20px;font-size:14px;font-weight:bold;margin-bottom:15px}
-.sponsor-name{font-size:32px;font-weight:900;color:#fff;text-shadow:0 0 20px rgba(244,63,94,.6);margin:10px 0}
-.btn-start-game{background:linear-gradient(135deg,var(--red),#be123c);color:#fff;border:none;padding:16px 45px;border-radius:30px;font-size:20px;font-weight:bold;cursor:pointer;box-shadow:0 10px 25px rgba(244,63,94,.4);margin-top:25px}
-.app-header{background:#0d111d;border-bottom:1px solid var(--bd);padding:12px 25px;display:flex;justify-content:space-between;align-items:center}
-.header-title{font-size:18px;font-weight:bold}
+:root{
+  --bg:#0a0c1a;--card:#12162b;--card2:#0e1122;--bd:#2a2f4d;
+  --red:#b3243f;--purple:#8b6fd6;--yellow:#d4af6a;--blue:#5a8fc2;
+  --text:#f1e9d8;--muted:#9a9cb5;--gold:#d4af6a;--gold-soft:rgba(212,175,106,.28);
+}
+*{box-sizing:border-box;font-family:'Cairo','Segoe UI',Tahoma,sans-serif}
+h1,h2,h3,.sponsor-name,.section-title,.header-title{font-family:'Aref Ruqaa','Cairo',serif}
+body{background:var(--bg);color:var(--text);margin:0;direction:rtl;line-height:1.7;
+  background-image:radial-gradient(ellipse at 50% -10%,rgba(139,111,214,.14),transparent 55%),radial-gradient(ellipse at 50% 110%,rgba(179,36,63,.10),transparent 50%);
+  background-attachment:fixed}
+:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+
+/* الشاشة الافتتاحية */
+#welcome-screen{display:flex;flex-direction:column;justify-content:center;align-items:center;min-height:100vh;padding:24px;text-align:center;
+  background:radial-gradient(circle at 50% 28%,#1d1a45 0%,#0a0c1a 62%)}
+.moon{width:150px;height:150px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:64px;margin:6px 0 18px;
+  background:radial-gradient(circle at 35% 30%,#fffaf0,#e8dcc0 55%,#bfae88);
+  box-shadow:0 0 0 10px rgba(232,220,192,.07),0 0 70px rgba(232,220,192,.45);animation:glow 5s ease-in-out infinite alternate}
+@keyframes glow{to{box-shadow:0 0 0 14px rgba(232,220,192,.09),0 0 100px rgba(232,220,192,.6)}}
+.sponsor-badge{border:1px solid var(--gold-soft);color:var(--gold);padding:6px 20px;border-radius:999px;font-size:14px;margin-bottom:10px}
+.sponsor-name{font-size:30px;font-weight:700;color:var(--text);margin:6px 0}
+#welcome-screen h1{font-size:52px;letter-spacing:.12em;margin:0;color:var(--text);font-weight:700;text-shadow:0 2px 24px rgba(179,36,63,.7)}
+.btn-start-game{background:linear-gradient(180deg,#c42c4a,#8f1a32);color:#fff7e6;border:1px solid var(--gold);padding:14px 50px;border-radius:999px;font-size:20px;font-weight:700;cursor:pointer;
+  box-shadow:0 0 0 4px rgba(212,175,106,.12),0 12px 30px rgba(179,36,63,.45);margin-top:26px;transition:transform .15s}
+.btn-start-game:active{transform:scale(.97)}
+
+/* الرأس */
+.app-header{background:rgba(10,12,26,.85);backdrop-filter:blur(8px);border-bottom:1px solid var(--gold-soft);padding:12px 24px;display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;z-index:5}
+.header-title{font-size:21px;color:var(--gold)}
 .top-bar{display:flex;justify-content:space-between;align-items:center;max-width:1100px;margin:20px auto 10px;padding:0 15px}
-.btn-icon-bg{background:#1e293b;border:1px solid #334155;color:var(--text);padding:8px 16px;border-radius:10px;cursor:pointer;font-weight:bold}
+.btn-icon-bg{background:transparent;border:1px solid var(--gold-soft);color:var(--text);padding:8px 16px;border-radius:10px;cursor:pointer;font-weight:600;transition:background .15s}
+.btn-icon-bg:hover{background:rgba(212,175,106,.12)}
 .main-wrapper{max-width:1100px;margin:0 auto;padding:0 15px 40px}
-.section-box{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:20px;margin-bottom:20px}
-.section-title{font-size:22px;font-weight:bold;margin-bottom:15px;display:flex;align-items:center;gap:10px}
-.section-title.wolf{color:var(--purple)}.section-title.village{color:#38bdf8}.section-title.neutral{color:var(--yellow)}
-.section-title small{font-size:14px;color:var(--muted)}
+
+/* الأقسام: القسم هو الإطار، والأدوار تبقى هادئة */
+.section-box{background:linear-gradient(180deg,var(--card),var(--card2));border:1px solid var(--bd);border-radius:18px;padding:22px;margin-bottom:22px;box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.section-title{font-size:26px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:10px;padding-bottom:10px;border-bottom:1px solid var(--bd)}
+.section-title.wolf{color:#c9b3ff}.section-title.village{color:#9cc4ec}.section-title.neutral{color:var(--gold)}
+.section-title small{font-size:14px;color:var(--muted);font-family:'Cairo',sans-serif;font-weight:400}
 .roles-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:12px}
-.role-card-item{background:#0f1422;border:1px solid var(--bd);border-radius:12px;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
+.role-card-item{background:rgba(255,255,255,.03);border:1px solid var(--bd);border-radius:12px;padding:10px 14px;display:flex;justify-content:space-between;align-items:center;transition:border-color .2s,background .2s}
+.role-card-item:hover,.role-card-item:has(input:checked){border-color:var(--gold-soft);background:rgba(212,175,106,.06)}
 .role-info{display:flex;align-items:center;gap:12px}
-.role-img-thumb{width:42px;height:42px;border-radius:8px;object-fit:cover;border:1px solid var(--bd);background:#1e293b}
-.role-name-ar{font-weight:bold;font-size:15px}
+.role-img-thumb{width:46px;height:46px;border-radius:50%;object-fit:cover;border:2px solid var(--gold-soft);background:#1e2240}
+.role-name-ar{font-weight:700;font-size:15px}
 .role-name-fr{font-size:11px;color:var(--muted)}
-.counter-group{display:flex;align-items:center;gap:10px;background:#182035;padding:4px 8px;border-radius:8px}
-.counter-btn{background:#263352;color:#fff;border:none;width:28px;height:28px;border-radius:6px;font-weight:bold;cursor:pointer}
-.count-num{font-weight:bold;min-width:18px;text-align:center}
-.checkbox-custom{width:18px;height:18px;cursor:pointer}
-.btn-launch{width:100%;background:linear-gradient(90deg,var(--red),var(--purple));border:none;color:#fff;padding:18px;font-size:20px;font-weight:bold;border-radius:14px;cursor:pointer;margin-top:10px}
-.play-card{background:var(--card);border:1px solid var(--bd);border-radius:16px;padding:30px;max-width:500px;margin:30px auto;text-align:center}
-.role-img-large{width:140px;height:140px;border-radius:16px;object-fit:cover;border:3px solid var(--purple);margin:15px auto;box-shadow:0 0 25px rgba(168,85,247,.4)}
-.timer-num{font-size:48px;font-weight:900;color:var(--red);font-family:monospace;margin:15px 0}
-.player-row{background:#0f1422;padding:12px;border-radius:10px;border:1px solid var(--bd);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;transition:all .3s}
-.player-row.dead{background:rgba(244,63,94,.15);border-color:var(--red);opacity:.7}
-.player-row.dead .p-name{text-decoration:line-through;color:var(--red)}
-.status-btn{padding:6px 12px;border-radius:6px;border:none;font-weight:bold;cursor:pointer;font-size:13px;color:#fff}
-.btn-kill{background:var(--red)}.btn-revive{background:#10b981}
-.call-step{background:#0f1422;border-right:4px solid var(--blue);padding:12px 15px;border-radius:8px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
-.call-num{background:var(--blue);color:#fff;font-weight:bold;min-width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
-.gm-box{background:#0f1422;border-radius:12px;padding:15px;margin-bottom:20px;border:1px solid var(--bd)}
-#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;padding:12px 22px;border-radius:12px;font-weight:bold;display:none;z-index:99;max-width:90%;text-align:center}
+.counter-group{display:flex;align-items:center;gap:10px;background:rgba(0,0,0,.3);padding:4px 8px;border-radius:999px;border:1px solid var(--bd)}
+.counter-btn{background:transparent;color:var(--gold);border:1px solid var(--gold-soft);width:28px;height:28px;border-radius:50%;font-weight:700;cursor:pointer}
+.counter-btn:hover{background:rgba(212,175,106,.15)}
+.count-num{font-weight:700;min-width:18px;text-align:center;color:var(--text)}
+.checkbox-custom{width:20px;height:20px;cursor:pointer;accent-color:#d4af6a}
+.btn-launch{width:100%;background:linear-gradient(180deg,#c42c4a,#8f1a32);border:1px solid var(--gold);color:#fff7e6;padding:16px;font-size:20px;font-weight:700;border-radius:14px;cursor:pointer;margin-top:10px;box-shadow:0 10px 26px rgba(179,36,63,.35)}
+
+/* بطاقة كشف الدور: اللحظة المميزة */
+.play-card{background:linear-gradient(180deg,#171b36,#0f1226);border:1px solid var(--gold);border-radius:20px;padding:30px 26px;max-width:480px;margin:30px auto;text-align:center;
+  box-shadow:inset 0 0 0 6px #0f1226,inset 0 0 0 7px var(--gold-soft),0 24px 60px rgba(0,0,0,.55)}
+.play-card h2{font-size:28px}
+.role-img-large{width:190px;height:250px;border-radius:14px;object-fit:cover;border:2px solid var(--gold);margin:16px auto;display:block;box-shadow:0 0 0 6px rgba(212,175,106,.12),0 0 40px rgba(139,111,214,.35)}
+#role-name{font-size:30px;color:#f06a84!important}
+
+/* لوحة الراوي */
+.gm-box{background:rgba(255,255,255,.03);border-radius:14px;padding:16px;margin-bottom:20px;border:1px solid var(--bd)}
+.timer-num{font-size:54px;font-weight:700;color:var(--gold);font-family:'Cairo',monospace;margin:10px 0;font-variant-numeric:tabular-nums}
+.player-row{background:rgba(255,255,255,.03);padding:10px 12px;border-radius:10px;border:1px solid var(--bd);margin-bottom:10px;display:flex;justify-content:space-between;align-items:center;gap:8px;transition:all .3s}
+.player-row.dead{background:rgba(179,36,63,.14);border-color:var(--red);opacity:.7}
+.player-row.dead .p-name{text-decoration:line-through;color:#f06a84}
+.status-btn{padding:6px 12px;border-radius:8px;border:none;font-weight:700;cursor:pointer;font-size:13px;color:#fff}
+.btn-kill{background:var(--red)}.btn-revive{background:#2f8f6b}
+.call-step{background:rgba(255,255,255,.03);border-right:3px solid var(--gold);padding:12px 15px;border-radius:10px;margin-bottom:10px;display:flex;align-items:center;gap:12px}
+.call-num{background:transparent;border:1px solid var(--gold);color:var(--gold);font-weight:700;min-width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px}
+#gm-notes{background:rgba(0,0,0,.3)!important;color:var(--text)!important}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#8f1a32;border:1px solid var(--gold);color:#fff7e6;padding:12px 22px;border-radius:12px;font-weight:700;display:none;z-index:99;max-width:90%;text-align:center}
+@media (max-width:520px){#welcome-screen h1{font-size:40px}.header-title{font-size:17px}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+
 </head>
 <body>
 
@@ -55,9 +93,9 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl}
 <div id="welcome-screen">
   <div class="sponsor-badge">✨ تطبيق للعبة المستذئب ✨</div>
   <div class="sponsor-name">من صنع NASRO MHB</div>
-  <div style="color:var(--muted);font-size:14px;margin-bottom:20px">MADE BY NASRO MHB</div>
-  <div style="font-size:80px;margin:10px 0">🐺</div>
-  <h1 style="color:var(--red);margin:0">LOUP-GAROU</h1>
+  <div style="color:var(--muted);font-size:13px;margin-bottom:6px;letter-spacing:.1em">MADE BY NASRO MHB</div>
+  <div class="moon" aria-hidden="true">🐺</div>
+  <h1>LOUP-GAROU</h1>
   <p style="color:var(--muted);font-size:15px">تطبيق توزيع الأدوار والقرعة للعب مع الأصدقاء</p>
   <button class="btn-start-game" onclick="enterApp()">دخول اللعبة 🎲</button>
 </div>
@@ -77,7 +115,7 @@ body{background:var(--bg);color:var(--text);margin:0;direction:rtl}
 
     <div id="guide-box" class="section-box" style="display:none"></div>
 
-    <div style="background:rgba(245,158,11,.1);border:1px solid var(--yellow);border-radius:12px;padding:10px 14px;margin-bottom:20px;font-size:14px;color:var(--yellow)">
+    <div style="background:rgba(212,175,106,.08);border:1px solid var(--gold-soft);border-radius:12px;padding:10px 14px;margin-bottom:20px;font-size:14px;color:var(--yellow)">
       ℹ️ الراوي (Game Master) لا يُحسب ضمن اللاعبين. عدد اللاعبين الحالي: <b id="player-total">0</b>
     </div>
 
